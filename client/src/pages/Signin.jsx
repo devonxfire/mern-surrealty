@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInFailure,
+  signInStart,
+  signInSuccess,
+} from "../redux/user/userSlice";
 
 export default function Signin() {
   const [formData, setFormdata] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
+  const { loading, error, currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormdata({ ...formData, [e.target.id]: e.target.value });
@@ -14,7 +22,7 @@ export default function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
+      dispatch(signInStart());
       const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
@@ -26,17 +34,23 @@ export default function Signin() {
       const data = await res.json();
 
       if (data.success === false) {
-        setLoading(false);
-        setError(data.message);
+        // setLoading(false);
+        // setError(data.message);
+        dispatch(signInFailure(data.message));
         console.log("from the if");
+        console.log(data.message);
         return;
       }
-      setLoading(false);
-      setError(null);
+      // setLoading(false);
+      // setError(null);
+      dispatch(signInSuccess(data));
+      console.log(data);
       navigate("/profile");
     } catch (error) {
-      setError("Server Error: " + error.message);
-      setLoading(false);
+      // setError("Server Error: " + error.message);
+      // setLoading(false);
+      dispatch(signInFailure(error.message));
+      console.log(error);
     }
   };
 
@@ -64,7 +78,7 @@ export default function Signin() {
           onChange={handleChange}
         />
         <button
-          className="uppercase p-3 bg-purple-500 mt-4 font-bold hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center"
+          className="uppercase p-3 bg-purple-500 mt-4 hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
           disabled={loading}
         >
           {loading ? "Loading..." : "Sign In"}

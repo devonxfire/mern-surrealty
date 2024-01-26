@@ -71,7 +71,7 @@ export default function Signup() {
           onChange={handleChange}
         />
         <button
-          className="uppercase p-3 bg-purple-500 mt-4 font-bold hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center"
+          className="uppercase p-3 bg-purple-500 mt-4  hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
           disabled={loading}
         >
           {loading ? "Loading..." : "Sign Up"}
