@@ -8,7 +8,7 @@ export const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
-    return res.status(400).json({ message: "All fields are required" });
+    return next(errorHandler(400, "All fields are required"));
   }
 
   try {
@@ -16,10 +16,10 @@ export const signup = async (req, res, next) => {
     const usernameExists = await User.findOne({ username });
 
     if (emailExists) {
-      return next(errorHandler(400, "Email already taken"));
+      return next(errorHandler(400, "Email is already taken"));
     }
     if (usernameExists) {
-      return next(errorHandler(400, "Username already taken"));
+      return next(errorHandler(400, "Username is already taken"));
     }
     const hashedPassword = bcryptjs.hashSync(password, 10);
 

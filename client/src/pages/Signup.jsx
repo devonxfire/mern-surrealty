@@ -1,8 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Signup() {
   const [formData, setFormdata] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormdata({ ...formData, [e.target.id]: e.target.value });
   };
@@ -10,18 +14,29 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5173/api/auth/signup", {
+      setLoading(true);
+      const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-      const data = res.json();
-      console.log(res);
-      console.log(data);
+
+      const data = await res.json();
+
+      if (data.success === false) {
+        setLoading(false);
+        setError(data.message);
+        console.log("from the if");
+        return;
+      }
+      setLoading(false);
+      setError(null);
+      navigate("/signin");
     } catch (error) {
-      console.log(error);
+      setError("Server Error: " + error.message);
+      setLoading(false);
     }
   };
 
@@ -55,17 +70,21 @@ export default function Signup() {
           className="p-3 focus:outline-none border rounded-lg"
           onChange={handleChange}
         />
-        <button className="uppercase p-3 bg-purple-500 mt-4 font-bold hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center ">
-          Sign up
+        <button
+          className="uppercase p-3 bg-purple-500 mt-4 font-bold hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center"
+          disabled={loading}
+        >
+          {loading ? "Loading..." : "Sign Up"}
         </button>
         <Link
           to="/signin"
           className="text-xs sm:text-sm pt-4 text-center sm:text-left"
         >
           <p>
-            Have an account? <span className="text-blue-500">Sign In</span>
+            Have an account? <span className="text-blue-500">Sign Up</span>
           </p>
         </Link>
+        {error && <p className="text-red-500">{error}</p>}
       </form>
     </div>
   );
