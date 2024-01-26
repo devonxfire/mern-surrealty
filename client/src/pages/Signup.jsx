@@ -81,7 +81,7 @@ export default function Signup() {
           className="text-xs sm:text-sm pt-4 text-center sm:text-left"
         >
           <p>
-            Have an account? <span className="text-blue-500">Sign Up</span>
+            Have an account? <span className="text-blue-500">Sign In</span>
           </p>
         </Link>
         {error && <p className="text-red-500">{error}</p>}
