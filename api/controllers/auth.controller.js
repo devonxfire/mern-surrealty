@@ -1,8 +1,9 @@
 import { User } from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
+import { errorHandler } from "../utils/errorHandler.js";
 
-export const signup = async (req, res) => {
+export const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
@@ -14,10 +15,10 @@ export const signup = async (req, res) => {
     const usernameExists = await User.findOne({ username });
 
     if (emailExists) {
-      return res.status(400).json({ message: "Email already exists" });
+      return next(errorHandler(400, "Email already taken"));
     }
     if (usernameExists) {
-      return res.status(400).json({ message: "Username already taken" });
+      return next(errorHandler(400, "Username already taken"));
     }
     const hashedPassword = bcryptjs.hashSync(password, 10);
 
@@ -30,6 +31,6 @@ export const signup = async (req, res) => {
     await newUser.save();
     res.status(201).json({ message: "User created successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Something went wrong" });
+    next(error);
   }
 };
