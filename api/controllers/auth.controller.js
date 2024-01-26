@@ -35,3 +35,36 @@ export const signup = async (req, res, next) => {
     next(error);
   }
 };
+
+// Sign in
+export const signin = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return next(errorHandler(400, "All fields are required"));
+  }
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return next(errorHandler(404, "User does not exist"));
+    }
+
+    const validPassword = bcryptjs.compareSync(password, user.password);
+
+    if (!validPassword) {
+      return next(errorHandler(403, "Invalid credentials"));
+    }
+
+    const { password: pass, ...rest } = user._doc;
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    res
+      .cookie("access_token", token, { httpOnly: true })
+      .status(200)
+      .json(rest);
+  } catch (error) {
+    next(error);
+  }
+};
