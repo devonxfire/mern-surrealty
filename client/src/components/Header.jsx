@@ -1,5 +1,6 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
+
 import { Link } from "react-router-dom";
 const Header = () => {
   return (
@@ -28,13 +29,19 @@ const Header = () => {
         <nav>
           <ul className="flex gap-4 text-slate-500 text-xs lg:text-base font-light">
             <Link to="/">
-              <li className="hidden sm:inline hover:underline">Home</li>
+              <li className="hidden sm:inline hover:underline hover:text-purple-500">
+                Home
+              </li>
             </Link>
             <Link to="/about">
-              <li className="hidden sm:inline hover:underline">About</li>
+              <li className="hidden sm:inline hover:underline hover:text-purple-500">
+                About
+              </li>
             </Link>
             <Link to="/signin">
-              <li className="  hover:underline">Sign In</li>
+              <li className="  hover:underline hover:text-purple-500">
+                Sign In
+              </li>
             </Link>
           </ul>
         </nav>
