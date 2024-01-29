@@ -3,6 +3,7 @@ import cors from "cors";
 import { connectDB } from "./config/connectDB.js";
 
 import authRouter from "./routes/auth.route.js";
+import userRouter from "./routes/user.route.js";
 
 // Connect to MongoDB
 connectDB();
@@ -16,6 +17,7 @@ app.use(cors());
 // Routes
 
 app.use("/api/auth", authRouter);
+app.use("/api/users", userRouter);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
