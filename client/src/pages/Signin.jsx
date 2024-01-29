@@ -6,6 +6,7 @@ import {
   signInStart,
   signInSuccess,
 } from "../redux/user/userSlice";
+import OAuth from "../components/OAuth";
 
 export default function Signin() {
   const [formData, setFormdata] = useState({});
@@ -37,20 +38,17 @@ export default function Signin() {
         // setLoading(false);
         // setError(data.message);
         dispatch(signInFailure(data.message));
-        console.log("from the if");
-        console.log(data.message);
+
         return;
       }
       // setLoading(false);
       // setError(null);
       dispatch(signInSuccess(data));
-      console.log(data);
       navigate("/profile");
     } catch (error) {
       // setError("Server Error: " + error.message);
       // setLoading(false);
       dispatch(signInFailure(error.message));
-      console.log(error);
     }
   };
 
@@ -83,6 +81,7 @@ export default function Signin() {
         >
           {loading ? "Loading..." : "Sign In"}
         </button>
+        <OAuth />
         <Link
           to="/signup"
           className="text-xs sm:text-sm pt-4 text-center sm:text-left"

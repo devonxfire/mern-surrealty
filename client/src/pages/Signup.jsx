@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
+import OAuth from "../components/OAuth";
+
 export default function Signup() {
   const [formData, setFormdata] = useState({});
   const [loading, setLoading] = useState(false);
@@ -14,6 +16,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setError(null);
       setLoading(true);
       const res = await fetch("/api/auth/signup", {
         method: "POST",
@@ -76,6 +79,8 @@ export default function Signup() {
         >
           {loading ? "Loading..." : "Sign Up"}
         </button>
+        <OAuth />
+
         <Link
           to="/signin"
           className="text-xs sm:text-sm pt-4 text-center sm:text-left"
