@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
 import { connectDB } from "./config/connectDB.js";
-
 import authRouter from "./routes/auth.route.js";
 import userRouter from "./routes/user.route.js";
+import cookieParser from "cookie-parser";
 
 // Connect to MongoDB
 connectDB();
@@ -13,6 +13,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
 // Routes
 
