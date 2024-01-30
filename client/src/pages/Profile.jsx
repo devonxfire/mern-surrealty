@@ -196,8 +196,16 @@ export default function Profile() {
           className="uppercase p-3 bg-purple-500 mt-4  hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
           disabled={isLoading}
         >
-          {isLoading ? "Loading..." : "Update"}
+          {isLoading ? "Loading..." : "Update profile"}
         </button>
+        <Link to="/create-listing" className="w-full flex justify-center">
+          <button
+            className="uppercase p-3 bg-lime-500 mt-1  hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
+            disabled={isLoading}
+          >
+            Create a new Listing
+          </button>
+        </Link>
 
         <Link
           to="/signin"
