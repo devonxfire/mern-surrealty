@@ -36,6 +36,19 @@ const userSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    deleteStart: (state) => {
+      state.error = null;
+      state.loading = true;
+    },
+    deleteSuccess: (state, action) => {
+      state.currentUser = null;
+      state.loading = false;
+      state.error = null;
+    },
+    deleteFailure: (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    },
     reset: (state) => {
       state.currentUser = null;
       state.error = null;
@@ -51,6 +64,9 @@ export const {
   updateStart,
   updateSuccess,
   updateFailure,
+  deleteFailure,
+  deleteStart,
+  deleteSuccess,
   reset,
 } = userSlice.actions;
 

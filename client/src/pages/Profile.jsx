@@ -5,6 +5,9 @@ import {
   updateSuccess,
   updateFailure,
   signInStart,
+  deleteStart,
+  deleteSuccess,
+  deleteFailure,
 } from "../redux/user/userSlice";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -29,7 +32,6 @@ export default function Profile() {
   const handleChange = (e) => {
     setFormdata({ ...formData, [e.target.id]: e.target.value });
   };
-  console.log(formData);
 
   useEffect(() => {
     if (file) {
@@ -87,6 +89,24 @@ export default function Profile() {
     } catch (error) {
       dispatch(updateFailure(error.message));
       setIsLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      dispatch(deleteStart());
+      const res = await fetch(`api/users/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+      const data = res.json();
+
+      if (data.success === false) {
+        dispatch(deleteFailure(data.message));
+        return;
+      }
+      dispatch(deleteSuccess());
+    } catch (error) {
+      dispatch(deleteFailure(error.message));
     }
   };
 
@@ -166,7 +186,9 @@ export default function Profile() {
           className="text-xs sm:text-sm pt-4 text-center sm:text-left"
         >
           <p className="flex justify-between">
-            <span className="text-red-500">Delete Account</span>
+            <span className="text-red-500" onClick={handleDelete}>
+              Delete Account
+            </span>
             <span className="text-blue-500">Sign Out</span>
           </p>
         </Link>
