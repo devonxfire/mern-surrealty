@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  updateStart,
+  updateSuccess,
+  updateFailure,
+  signInStart,
+} from "../redux/user/userSlice";
 import { useEffect, useRef, useState } from "react";
 import {
   getDownloadURL,
@@ -10,12 +16,16 @@ import {
 import { app } from "../firebase";
 
 export default function Profile() {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, error } = useSelector((state) => state.user);
   const fileRef = useRef(null);
   const [file, setFile] = useState(null);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormdata] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const dispatch = useDispatch();
+
   const handleChange = (e) => {
     setFormdata({ ...formData, [e.target.id]: e.target.value });
   };
@@ -54,6 +64,8 @@ export default function Profile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      dispatch(updateStart());
+      setIsLoading(true);
       const res = await fetch(`/api/users/update/${currentUser._id}`, {
         method: "POST",
         headers: {
@@ -65,9 +77,17 @@ export default function Profile() {
       const data = await res.json();
 
       if (data.success === false) {
+        dispatch(updateFailure(data.message));
+        setIsLoading(false);
         return;
       }
-    } catch (error) {}
+      dispatch(updateSuccess(data));
+      setIsLoading(false);
+      setIsSuccess(true);
+    } catch (error) {
+      dispatch(updateFailure(error.message));
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -134,8 +154,11 @@ export default function Profile() {
           onChange={handleChange}
           defaultValue="********"
         />
-        <button className="uppercase p-3 bg-purple-500 mt-4  hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center transition duration-300 ease-in-out transform hover:scale-105">
-          UPDATE
+        <button
+          className="uppercase p-3 bg-purple-500 mt-4  hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
+          disabled={isLoading}
+        >
+          {isLoading ? "Loading..." : "Update"}
         </button>
 
         <Link
@@ -147,6 +170,20 @@ export default function Profile() {
             <span className="text-blue-500">Sign Out</span>
           </p>
         </Link>
+        <p className="text-red-500">
+          {error ? error : ""}
+          {error && (
+            <button
+              className="border bg-purple-500 text-white px-3  ml-2 rounded-lg"
+              onClick={() => dispatch(signInStart())}
+            >
+              OK
+            </button>
+          )}
+        </p>
+        <p className="text-green-500">
+          {isSuccess ? "User updated successfully!" : ""}
+        </p>
       </form>
     </div>
   );

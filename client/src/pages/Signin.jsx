@@ -5,6 +5,7 @@ import {
   signInFailure,
   signInStart,
   signInSuccess,
+  reset,
 } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
 
@@ -92,7 +93,17 @@ export default function Signin() {
             <span className="text-blue-500">Sign Up</span>
           </p>
         </Link>
-        {error && <p className="text-red-500">{error}</p>}
+        <p className="text-red-500">
+          {error ? error : ""}
+          {error && (
+            <button
+              className="border bg-purple-500 text-white px-3  ml-2 rounded-lg"
+              onClick={() => dispatch(reset())}
+            >
+              OK
+            </button>
+          )}
+        </p>
       </form>
     </div>
   );

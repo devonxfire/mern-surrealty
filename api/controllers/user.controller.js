@@ -7,6 +7,10 @@ export const updateUser = async (req, res, next) => {
     return next(errorHandler(401, "You can update only your account!"));
   }
 
+  // if (!req.body.password) {
+  //   return next(errorHandler(401, "You must provide a password!"));
+  // }
+
   try {
     if (req.body.password) {
       req.body.password = bcryptjs.hashSync(req.body.password, 10);
