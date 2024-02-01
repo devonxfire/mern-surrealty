@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 // Firebase Image Imports
 import {
@@ -9,7 +9,7 @@ import {
 } from "firebase/storage";
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const CreateListing = () => {
   const [files, setFiles] = useState([]);
@@ -19,6 +19,7 @@ const CreateListing = () => {
   const [loading, setLoading] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const params = useParams();
   const [formData, setFormdata] = useState({
     imageUrls: [],
     title: "",
@@ -34,7 +35,25 @@ const CreateListing = () => {
     discountPrice: 0,
   });
 
-  console.log(formData);
+  useEffect(() => {
+    try {
+      const fetchListing = async () => {
+        const listingId = params.listingId;
+        const res = await fetch(`/api/listing/get/${listingId}`);
+        const data = await res.json();
+
+        if (!res.ok) {
+          setError(data.message || "An error occurred");
+          return;
+        }
+
+        setFormdata(data);
+      };
+      fetchListing();
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, []);
 
   const storeImage = async (file) => {
     return new Promise((resolve, reject) => {
@@ -121,7 +140,7 @@ const CreateListing = () => {
     }
   };
 
-  const handleCreateListing = async (e) => {
+  const handleUpdateListing = async (e) => {
     e.preventDefault();
 
     try {
@@ -143,8 +162,8 @@ const CreateListing = () => {
         return setError("Discount price cannot be higher than regular price");
       }
 
-      const res = await fetch("/api/listing/create", {
-        method: "POST",
+      const res = await fetch(`/api/listing/edit/${params.listingId}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -152,9 +171,6 @@ const CreateListing = () => {
       });
       const data = await res.json();
       setLoading(false);
-
-      console.log(res);
-      console.log(data);
 
       if (!res.ok) {
         setError(data.message || "An error occurred");
@@ -367,9 +383,9 @@ const CreateListing = () => {
           <button
             className="p-3 uppercase text-white  rounded-lg  bg-lime-500 w-full hover:opacity-90 disabled:opacity-70"
             disabled={loading || uploading}
-            onClick={handleCreateListing}
+            onClick={handleUpdateListing}
           >
-            {loading ? "Creating..." : "Create Listing"}
+            {loading ? "Updating..." : "Update Listing"}
           </button>
           {error && <p className="text-red-500">{error}</p>}
         </div>
