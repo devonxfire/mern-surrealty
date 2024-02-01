@@ -33,7 +33,6 @@ export default function Profile() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [listings, setListings] = useState([]);
-  const [viewListings, setViewListings] = useState(false);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -230,7 +229,11 @@ export default function Profile() {
             Create a new Listing
           </button>
         </Link>
-
+        <Link to="/my-listings">
+          <button className="w-full mt-6 bg-orange-500 p-3 text-white rounded-lg mx-auto uppercase">
+            View my listings
+          </button>
+        </Link>
         <Link
           to="/signin"
           className="text-xs sm:text-sm pt-4 text-center sm:text-left"
@@ -244,57 +247,19 @@ export default function Profile() {
             </span>
           </p>
         </Link>
-
-        <button
-          onClick={() => setViewListings(!viewListings)}
-          className="w-full"
-        >
-          {viewListings ? "Hide my listings" : "View my listings"}
-        </button>
-
-        {/* View my listings UI*/}
-        {viewListings &&
-          listings.length > 0 &&
-          listings.map((listing) => (
-            <div
-              key={listing._id}
-              className="border mt-4 rounded-lg p-3 flex justify-between items-center gap-4"
-            >
-              <Link to={`/listing/${listing._id}`}>
-                <img
-                  src={listing.imageUrls[0]}
-                  alt="listing cover"
-                  className="h-16 w-16 object-contain"
-                />
-              </Link>
-              <Link
-                className="text-slate-700   hover:underline truncate flex-1"
-                to={`/listing/${listing._id}`}
-              >
-                <p>{listing.title}</p>
-              </Link>
-
-              <div className="flex items-center gap-1">
-                <button className="text-purple-500">Edit</button>
-                <FaEdit className="text-lg cursor-pointer text-purple-500 mr-4" />
-                <button className="text-red-500">Delete</button>
-                <MdDelete className="text-lg cursor-pointer  text-red-500" />
-              </div>
-            </div>
-          ))}
-
-        <p className="text-red-500">
-          {error ? error : ""}
-          {error && (
-            <button
-              className="border bg-purple-500 text-white px-3  ml-2 rounded-lg"
-              onClick={() => dispatch(signInStart())}
-            >
-              OK
-            </button>
-          )}
-        </p>
       </form>
+
+      <p className="text-red-500">
+        {error ? error : ""}
+        {error && (
+          <button
+            className="border bg-purple-500 text-white px-3  ml-2 rounded-lg"
+            onClick={() => dispatch(signInStart())}
+          >
+            OK
+          </button>
+        )}
+      </p>
     </div>
   );
 }

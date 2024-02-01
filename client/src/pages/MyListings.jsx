@@ -1,0 +1,63 @@
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+export default function () {
+  // View my listings functionality
+
+  const [listings, setListings] = useState([]);
+  const { currentUser } = useSelector((state) => state.user);
+  useEffect(() => {
+    try {
+      const fetchMyListings = async () => {
+        const res = await fetch(`api/users/listings/${currentUser._id}`);
+        console.log(res);
+        const data = await res.json();
+        console.log(data);
+        setListings(data);
+      };
+      fetchMyListings();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+  return (
+    <div className="flex flex-col  pt-16 min-h-screen">
+      <div className="container max-w-xl rounded-lg shadow-lg p-3 mx-auto">
+        <h1 className="text-center text-orange-500 font-extrabold text-xl sm:text-3xl">
+          My Listings
+        </h1>
+        {listings.length > 0 &&
+          listings.map((listing) => (
+            <div
+              key={listing._id}
+              className="border mt-4 rounded-lg p-3 flex justify-between items-center gap-4"
+            >
+              <Link to={`/listing/${listing._id}`}>
+                <img
+                  src={listing.imageUrls[0]}
+                  alt="listing cover"
+                  className="h-16 w-16 object-contain"
+                />
+              </Link>
+              <Link
+                className="text-slate-700   hover:underline truncate flex-1"
+                to={`/listing/${listing._id}`}
+              >
+                <p>{listing.title}</p>
+              </Link>
+
+              <div className="flex items-center gap-1">
+                <button className="text-purple-500">Edit</button>
+                <FaEdit className="text-lg cursor-pointer text-purple-500 mr-4" />
+                <button className="text-red-500">Delete</button>
+                <MdDelete className="text-lg cursor-pointer  text-red-500" />
+              </div>
+            </div>
+          ))}
+      </div>
+    </div>
+  );
+}
