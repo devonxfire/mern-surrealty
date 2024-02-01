@@ -220,6 +220,10 @@ export default function Profile() {
             </span>
           </p>
         </Link>
+        <Link to="/my-listings">
+          <button>View my Listings</button>
+        </Link>
+
         <p className="text-red-500">
           {error ? error : ""}
           {error && (

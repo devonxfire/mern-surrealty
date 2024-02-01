@@ -128,6 +128,11 @@ const CreateListing = () => {
       setLoading(true);
       setError(null);
 
+      if (formData.title.length < 3) {
+        setLoading(false);
+        return setError("Title must be at least 3 characters long");
+      }
+
       if (formData.imageUrls.length < 1) {
         setLoading(false);
         return setError("Please upload at least one image");
@@ -166,7 +171,7 @@ const CreateListing = () => {
   return (
     <main className="pt-8 p-3 max-w-4xl mx-auto min-h-screen ">
       <h1 className="text-center text-orange-500 font-extrabold text-xl sm:text-3xl pb-8">
-        Create a Listing
+        Create a new Listing
       </h1>
       <form className="flex flex-col sm:flex-row px-4 text-xs sm:text-sm gap-4">
         {/* left block */}
