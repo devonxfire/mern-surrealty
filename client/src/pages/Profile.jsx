@@ -20,6 +20,8 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 export default function Profile() {
   const { currentUser, error } = useSelector((state) => state.user);
@@ -30,6 +32,8 @@ export default function Profile() {
   const [formData, setFormdata] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [listings, setListings] = useState([]);
+  const [viewListings, setViewListings] = useState(false);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -41,6 +45,22 @@ export default function Profile() {
       handleFileUpload(file);
     }
   }, [file]);
+
+  // View my listings functionality
+  useEffect(() => {
+    try {
+      const fetchMyListings = async () => {
+        const res = await fetch(`api/users/listings/${currentUser._id}`);
+        console.log(res);
+        const data = await res.json();
+        console.log(data);
+        setListings(data);
+      };
+      fetchMyListings();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   const handleFileUpload = async (file) => {
     const storage = getStorage(app);
@@ -198,9 +218,13 @@ export default function Profile() {
         >
           {isLoading ? "Loading..." : "Update profile"}
         </button>
+        {isSuccess ? (
+          <p className="text-green-500 text-sm">User updated successfully!</p>
+        ) : null}
+
         <Link to="/create-listing" className="w-full flex justify-center">
           <button
-            className="uppercase p-3 bg-lime-500 mt-1  hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
+            className="uppercase p-3 bg-lime-500 mt-[-6px] hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
             disabled={isLoading}
           >
             Create a new Listing
@@ -220,9 +244,44 @@ export default function Profile() {
             </span>
           </p>
         </Link>
-        <Link to="/my-listings">
-          <button>View my Listings</button>
-        </Link>
+
+        <button
+          onClick={() => setViewListings(!viewListings)}
+          className="w-full"
+        >
+          {viewListings ? "Hide my listings" : "View my listings"}
+        </button>
+
+        {/* View my listings UI*/}
+        {viewListings &&
+          listings.length > 0 &&
+          listings.map((listing) => (
+            <div
+              key={listing._id}
+              className="border mt-4 rounded-lg p-3 flex justify-between items-center gap-4"
+            >
+              <Link to={`/listing/${listing._id}`}>
+                <img
+                  src={listing.imageUrls[0]}
+                  alt="listing cover"
+                  className="h-16 w-16 object-contain"
+                />
+              </Link>
+              <Link
+                className="text-slate-700   hover:underline truncate flex-1"
+                to={`/listing/${listing._id}`}
+              >
+                <p>{listing.title}</p>
+              </Link>
+
+              <div className="flex items-center gap-1">
+                <button className="text-purple-500">Edit</button>
+                <FaEdit className="text-lg cursor-pointer text-purple-500 mr-4" />
+                <button className="text-red-500">Delete</button>
+                <MdDelete className="text-lg cursor-pointer  text-red-500" />
+              </div>
+            </div>
+          ))}
 
         <p className="text-red-500">
           {error ? error : ""}
@@ -234,9 +293,6 @@ export default function Profile() {
               OK
             </button>
           )}
-        </p>
-        <p className="text-green-500">
-          {isSuccess ? "User updated successfully!" : ""}
         </p>
       </form>
     </div>
