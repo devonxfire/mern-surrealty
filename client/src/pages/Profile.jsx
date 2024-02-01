@@ -148,7 +148,7 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex flex-col  pt-20 min-h-screen">
+    <div className="flex flex-col  pt-12 min-h-screen">
       <h1 className="text-center text-orange-500 font-extrabold text-xl sm:text-3xl">
         My Profile
       </h1>
@@ -229,9 +229,12 @@ export default function Profile() {
             Create a new Listing
           </button>
         </Link>
-        <Link to="/my-listings">
-          <button className="w-full mt-6 bg-orange-500 p-3 text-white rounded-lg mx-auto uppercase">
-            View my listings
+        <Link to="/my-listings" className="w-full flex justify-center">
+          <button
+            className="uppercase p-3 bg-gray-800 mt-[-6px] hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
+            disabled={isLoading}
+          >
+            view my listings
           </button>
         </Link>
         <Link

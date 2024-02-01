@@ -16,3 +16,22 @@ export const createListing = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deleteListing = async (req, res, next) => {
+  try {
+    const listing = await Listing.findById(req.params.listingId);
+
+    if (!listing) return next(errorHandler(404, "Listing not found"));
+
+    if (req.user._id !== listing.userRef)
+      return next(
+        errorHandler(403, "You are not authorized to delete this listing")
+      );
+
+    await Listing.findByIdAndDelete(req.params.listingId);
+
+    res.status(200).json("Listing deleted successfully");
+  } catch (error) {
+    next(error);
+  }
+};
