@@ -5,6 +5,7 @@ const listingSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
+      unique: true,
     },
     description: {
       type: String,
@@ -30,11 +31,11 @@ const listingSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    isFurnished: {
+    furnished: {
       type: Boolean,
       required: true,
     },
-    propertyType: {
+    type: {
       type: String,
       required: true,
     },
