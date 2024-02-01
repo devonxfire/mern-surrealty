@@ -71,8 +71,14 @@ export default function () {
               </Link>
 
               <div className="flex items-center gap-1">
-                <button className="text-purple-500">Edit</button>
-                <FaEdit className="text-lg cursor-pointer text-purple-500 mr-4" />
+                <Link
+                  to={`/edit-listing/${listing._id}`}
+                  className="flex items-center gap-2"
+                >
+                  <button className="text-purple-500">Edit</button>
+                  <FaEdit className="text-lg cursor-pointer text-purple-500 mr-4" />
+                </Link>
+
                 <button
                   className="text-red-500"
                   onClick={() => handleDelete(listing._id)}
