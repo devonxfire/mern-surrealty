@@ -23,7 +23,7 @@ export const deleteListing = async (req, res, next) => {
 
     if (!listing) return next(errorHandler(404, "Listing not found"));
 
-    if (req.user._id !== listing.userRef)
+    if (req.user.id !== listing.userRef)
       return next(
         errorHandler(403, "You are not authorized to delete this listing")
       );

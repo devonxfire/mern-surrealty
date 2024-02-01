@@ -23,8 +23,29 @@ export default function () {
       console.log(error);
     }
   }, []);
+
+  const handleDelete = async (listingId) => {
+    try {
+      const res = await fetch(`api/listing/delete/${listingId}`, {
+        method: "DELETE",
+      });
+      const data = res.json();
+
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+
+      const newListings = listings.filter(
+        (listing) => listing._id !== listingId
+      );
+      setListings(newListings);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
-    <div className="flex flex-col  pt-16 min-h-screen">
+    <div className="flex flex-col  pt-16 min-h-screen ">
       <div className="container max-w-xl rounded-lg shadow-lg p-3 mx-auto">
         <h1 className="text-center text-orange-500 font-extrabold text-xl sm:text-3xl">
           My Listings
@@ -52,8 +73,16 @@ export default function () {
               <div className="flex items-center gap-1">
                 <button className="text-purple-500">Edit</button>
                 <FaEdit className="text-lg cursor-pointer text-purple-500 mr-4" />
-                <button className="text-red-500">Delete</button>
-                <MdDelete className="text-lg cursor-pointer  text-red-500" />
+                <button
+                  className="text-red-500"
+                  onClick={() => handleDelete(listing._id)}
+                >
+                  Delete
+                </button>
+                <MdDelete
+                  className="text-lg cursor-pointer  text-red-500"
+                  onClick={() => handleDelete(listing._id)}
+                />
               </div>
             </div>
           ))}
