@@ -10,6 +10,7 @@ import Signup from "./pages/Signup";
 import CreateListing from "./pages/CreateListing";
 import MyListings from "./pages/MyListings";
 import EditListing from "./pages/EditListing";
+import Listing from "./pages/Listing";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signout" element={<Signout />} />
+        <Route path="/listing/:listingId" element={<Listing />} />
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/create-listing" element={<CreateListing />} />

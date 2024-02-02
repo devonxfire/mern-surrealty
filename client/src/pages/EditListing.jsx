@@ -10,8 +10,9 @@ import {
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { set } from "mongoose";
 
-const CreateListing = () => {
+const EditListing = () => {
   const [files, setFiles] = useState([]);
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -36,24 +37,24 @@ const CreateListing = () => {
   });
 
   useEffect(() => {
-    try {
-      const fetchListing = async () => {
-        const listingId = params.listingId;
-        const res = await fetch(`/api/listing/get/${listingId}`);
-        const data = await res.json();
+    const fetchListing = async () => {
+      const listingId = params.listingId;
+      const res = await fetch(`/api/listing/get/${listingId}`);
+      const data = await res.json();
+      console.log(data);
+      if (!res.ok) {
+        console.log(data.message);
+        return;
+      }
+      setFormdata(data);
+    };
 
-        if (!res.ok) {
-          setError(data.message || "An error occurred");
-          return;
-        }
-
-        setFormdata(data);
-      };
-      fetchListing();
-    } catch (error) {
-      console.log(error.message);
-    }
+    fetchListing();
   }, []);
+
+  useEffect(() => {
+    setFormdata({ ...formData, discountPrice: 0 });
+  }, [formData.offer]);
 
   const storeImage = async (file) => {
     return new Promise((resolve, reject) => {
@@ -308,7 +309,9 @@ const CreateListing = () => {
               />
               <div className="flex flex-col items-center">
                 <p>Regular Price</p>
-                <span className="text-[0.6rem]">($ / month)</span>
+                <span className="text-[0.6rem]">
+                  {formData.type === "rent" ? "($ / month)" : ""}
+                </span>
               </div>
             </div>
             {formData.offer && (
@@ -325,7 +328,9 @@ const CreateListing = () => {
                 />
                 <div className="flex flex-col items-center">
                   <p>Discount Price</p>
-                  <span className="text-[0.6rem]">($ / month)</span>
+                  <span className="text-[0.6rem]">
+                    {formData.type === "rent" ? "($ / month)" : ""}
+                  </span>
                 </div>
               </div>
             )}
@@ -394,7 +399,7 @@ const CreateListing = () => {
   );
 };
 
-export default CreateListing;
+export default EditListing;
 
 // service firebase.storage {
 //     match /b/{bucket}/o {
