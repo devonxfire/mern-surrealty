@@ -24,8 +24,6 @@ export default function Listing() {
   //   subject
   // )}`;
 
-  console.log(listing.parking);
-
   useEffect(() => {
     const fetchListing = async () => {
       setLoading(true);
@@ -55,7 +53,7 @@ export default function Listing() {
           {listing.imageUrls.map((url) => (
             <SwiperSlide key={url}>
               <div
-                className="h-[50vh]"
+                className="h-[50vh] "
                 style={{
                   background: `url(${url})`,
                   backgroundSize: "cover",
@@ -67,14 +65,6 @@ export default function Listing() {
         </Swiper>
       )}
 
-      {/* {listing.imageUrls && (
-        <img
-          className="w-full h-[50vh] object-cover "
-          src={listing.imageUrls[0]}
-          alt="cover"
-        />
-      )} */}
-
       <div className="flex flex-col max-w-3xl mx-auto  p-6 text-sm sm:text-base gap-4">
         <h1 className="font-semibold text-lg sm:text-2xl">{listing.title}</h1>
         <div className="flex gap-1 items-center text-green-700">
@@ -83,10 +73,10 @@ export default function Listing() {
         </div>
 
         <div className="flex gap-2 text-xs sm:text-sm">
-          <p className=" bg-orange-500 text-white px-12 py-1 rounded-lg  self-center">
+          <p className=" bg-blue-950 text-white px-12 py-1 rounded-lg  self-center">
             {listing.type === "sell" ? "For Sale" : "For Rent"}
           </p>
-          <p className="bg-purple-500 text-white px-12 py-1 rounded-lg self-center">
+          <p className="bg-slate-500 text-white px-12 py-1 rounded-lg self-center">
             {listing.offer && listing.type === "rent"
               ? `Discounted Price $${listing.discountPrice.toLocaleString()} / month`
               : "" ||
@@ -105,7 +95,7 @@ export default function Listing() {
           <span className="font-bold">Description: </span>
           {listing.description}
         </p>
-        <div className="text-purple-500 text-xs flex gap-6 flex-wrap">
+        <div className="text-green-700 text-xs flex gap-6 flex-wrap">
           <div className="flex gap-1 items-center">
             <FaBed />
             <p>{listing.bedrooms} Beds</p>
@@ -124,19 +114,21 @@ export default function Listing() {
             <p>{listing.furnished ? "Furnished" : "Not furnished"}</p>
           </div>
         </div>
-        <a href="mailto:#">
-          <button className="uppercase p-3 bg-slate-700 hover:opacity-80 text-white rounded-lg  w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4">
-            contact agent
-          </button>
+        {!currentUser && currentUser?._id !== listing.userRef && (
+          <Link to={`/edit-listing/${listing._id}`}>
+            <button className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4">
+              contact the agent
+            </button>
+          </Link>
+        )}
 
-          {currentUser && (
-            <Link to={`/edit-listing/${listing._id}`}>
-              <button className="uppercase p-3 bg-lime-500 hover:opacity-80 text-white rounded-lg  w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4">
-                edit my listing
-              </button>
-            </Link>
-          )}
-        </a>
+        {currentUser && currentUser._id === listing.userRef && (
+          <Link to={`/edit-listing/${listing._id}`}>
+            <button className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4">
+              edit my listing
+            </button>
+          </Link>
+        )}
       </div>
     </main>
   );

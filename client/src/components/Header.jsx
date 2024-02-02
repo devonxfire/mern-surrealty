@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
   return (
-    <header className="border-b">
+    <header className="border-b  bg-white ">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-4">
         <Link to="/">
           <h1 className="text-xl sm:text-3xl lg:text-4xl flex flex-wrap">
             <span
               className="
-          text-orange-500 font-bold"
+          text-red-600 font-bold"
             >
               Surrealty
             </span>
@@ -45,7 +45,7 @@ const Header = () => {
                 <img
                   src={currentUser.photo}
                   alt="user-photo"
-                  className="w-8 h-8 sm:w-12 sm:h-12 rounded-full object-cover"
+                  className="w-8 h-8 sm:w-12 sm:h-12 rounded-full object-cover "
                 />
               </Link>
             ) : (

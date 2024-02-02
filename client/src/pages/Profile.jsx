@@ -149,7 +149,7 @@ export default function Profile() {
 
   return (
     <div className="flex flex-col  pt-12 min-h-screen">
-      <h1 className="text-center text-orange-500 font-extrabold text-xl sm:text-3xl">
+      <h1 className="text-center text-slate-500 font-extrabold text-xl sm:text-3xl">
         My Profile
       </h1>
       <form
@@ -158,7 +158,7 @@ export default function Profile() {
       >
         <img
           src={formData.photo || currentUser.photo}
-          className="w-12 h-12 sm:w-24 sm:h-24 rounded-full self-center cursor-pointer"
+          className="w-12 h-12 sm:w-24 sm:h-24 rounded-full self-center cursor-pointer "
           alt="photo"
           onClick={() => fileRef.current.click()}
         />
@@ -212,7 +212,7 @@ export default function Profile() {
           defaultValue="********"
         />
         <button
-          className="uppercase p-3 bg-purple-500 mt-4  hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
+          className="uppercase font-bold p-3 bg-slate-500 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4"
           disabled={isLoading}
         >
           {isLoading ? "Loading..." : "Update profile"}
@@ -223,7 +223,7 @@ export default function Profile() {
 
         <Link to="/create-listing" className="w-full flex justify-center">
           <button
-            className="uppercase p-3 bg-lime-500 mt-[-6px] hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
+            className="uppercase font-bold p-3 bg-blue-950 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
             disabled={isLoading}
           >
             Create a new Listing
@@ -231,7 +231,7 @@ export default function Profile() {
         </Link>
         <Link to="/my-listings" className="w-full flex justify-center">
           <button
-            className="uppercase p-3 bg-gray-800 mt-[-6px] hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
+            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
             disabled={isLoading}
           >
             view my listings

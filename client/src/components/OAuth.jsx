@@ -38,11 +38,11 @@ export default function OAuth() {
   return (
     <div className="flex items-center justify-center">
       <button
-        className="uppercase p-3 hover:opacity-80 text-slate-500 font-medium border rounded-lg w-[50%] sm:w-full self-center transition duration-300 ease-in-out transform hover:scale-105 text-[10px] sm:text-base"
+        className="uppercase font-bold p-3 border border-blue-950 hover:opacity-80 text-slate-500 w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
         onClick={handleGoogleClick}
       >
         <div className="flex items-center justify-center gap-2">
-          <FaGoogle className="text-orange-500" />
+          <FaGoogle className="text-red-600" />
           Continue with Google
         </div>
       </button>

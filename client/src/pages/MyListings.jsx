@@ -47,14 +47,14 @@ export default function () {
   return (
     <div className="flex flex-col  pt-16 min-h-screen ">
       <div className="container max-w-xl rounded-lg shadow-lg p-3 mx-auto">
-        <h1 className="text-center text-orange-500 font-extrabold text-xl sm:text-3xl">
+        <h1 className="text-center text-slate-500 font-extrabold text-xl sm:text-3xl">
           My Listings
         </h1>
         {listings.length > 0 &&
           listings.map((listing) => (
             <div
               key={listing._id}
-              className="border mt-4 rounded-lg p-3 flex justify-between items-center gap-4"
+              className="border mt-4 rounded-lg p-3 flex justify-between items-center gap-4 hover:bg-blue-950 text-slate-500  hover:text-white"
             >
               <Link to={`/listing/${listing._id}`}>
                 <img
@@ -64,19 +64,19 @@ export default function () {
                 />
               </Link>
               <Link
-                className="text-slate-700   hover:underline truncate flex-1"
+                className="   truncate flex-1"
                 to={`/listing/${listing._id}`}
               >
                 <p>{listing.title}</p>
               </Link>
 
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 ">
                 <Link
                   to={`/edit-listing/${listing._id}`}
                   className="flex items-center gap-2"
                 >
-                  <button className="text-purple-500">Edit</button>
-                  <FaEdit className="text-lg cursor-pointer text-purple-500 mr-4" />
+                  <button className="text-slate-500">Edit</button>
+                  <FaEdit className="text-lg cursor-pointer text-slate-500  mr-4" />
                 </Link>
 
                 <button

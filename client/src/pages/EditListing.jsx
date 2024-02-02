@@ -187,7 +187,7 @@ const EditListing = () => {
 
   return (
     <main className="pt-8 p-3 max-w-4xl mx-auto min-h-screen ">
-      <h1 className="text-center text-orange-500 font-extrabold text-xl sm:text-3xl pb-8">
+      <h1 className="text-center text-slate-500 font-extrabold text-xl sm:text-3xl pb-8">
         Edit Listing
       </h1>
       <form className="flex flex-col sm:flex-row px-4 text-xs sm:text-sm gap-4">
@@ -352,7 +352,7 @@ const EditListing = () => {
               onChange={(e) => setFiles(e.target.files)}
             />
             <button
-              className="p-3 bg-purple-500 text-white uppercase rounded-lg hover:opacity-90 disabled:opacity-75"
+              className="uppercase font-bold p-3 bg-blue-950 hover:opacity-80 text-white w-[60%] self-center transition duration-300 ease-in-out transform hover:scale-105 "
               type="button"
               disabled={uploading}
               onClick={handleImageUpload}
@@ -386,7 +386,7 @@ const EditListing = () => {
               </div>
             ))}
           <button
-            className="p-3 uppercase text-white  rounded-lg  bg-lime-500 w-full hover:opacity-90 disabled:opacity-70"
+            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4"
             disabled={loading || uploading}
             onClick={handleUpdateListing}
           >

@@ -55,8 +55,8 @@ export default function Signin() {
   };
 
   return (
-    <div className="flex flex-col  pt-20 min-h-screen">
-      <h1 className="text-center text-orange-500 font-extrabold text-xl sm:text-3xl">
+    <div className="flex flex-col mt-20 min-h-screen">
+      <h1 className="text-center text-slate-500 font-extrabold text-xl sm:text-3xl">
         Sign In
       </h1>
       <form
@@ -78,7 +78,7 @@ export default function Signin() {
           onChange={handleChange}
         />
         <button
-          className="uppercase p-3 bg-purple-500 mt-4 hover:opacity-80 text-white rounded-lg w-[50%] sm:w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
+          className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
           disabled={loading}
         >
           {loading ? "Loading..." : "Sign In"}
@@ -88,7 +88,7 @@ export default function Signin() {
           to="/signup"
           className="text-xs sm:text-sm pt-4 text-center sm:text-left"
         >
-          <p>
+          <p className="text-slate-500 ">
             Don&apos;t have an account?{" "}
             <span className="text-blue-500">Sign Up</span>
           </p>
