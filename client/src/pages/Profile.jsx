@@ -50,9 +50,7 @@ export default function Profile() {
     try {
       const fetchMyListings = async () => {
         const res = await fetch(`api/users/listings/${currentUser._id}`);
-        console.log(res);
         const data = await res.json();
-        console.log(data);
         setListings(data);
       };
       fetchMyListings();

@@ -31,12 +31,12 @@ const Header = () => {
         <nav>
           <ul className="flex items-center gap-4 text-slate-500 text-xs lg:text-base font-light">
             <Link to="/">
-              <li className="hidden sm:inline hover:underline hover:text-purple-500">
+              <li className="hidden sm:inline hover:underline hover:text-red-600">
                 Home
               </li>
             </Link>
             <Link to="/about">
-              <li className="hidden sm:inline hover:underline hover:text-purple-500">
+              <li className="hidden sm:inline hover:underline hover:text-red-600">
                 About
               </li>
             </Link>
@@ -50,7 +50,7 @@ const Header = () => {
               </Link>
             ) : (
               <Link to="/signin">
-                <li className="  hover:underline hover:text-purple-500">
+                <li className="  hover:underline hover:text-red-600">
                   Sign In
                 </li>
               </Link>

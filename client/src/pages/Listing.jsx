@@ -8,12 +8,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import "swiper/swiper-bundle.css";
+import Contact from "../components/Contact";
 
 export default function Listing() {
   SwiperCore.use([Navigation]);
   const params = useParams();
   const [listing, setListing] = useState({});
   const [loading, setLoading] = useState(false);
+  const [contact, setContact] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
   // if (currentUser) {
   //   const emailAddress = currentUser.email;
@@ -73,10 +75,10 @@ export default function Listing() {
         </div>
 
         <div className="flex gap-2 text-xs sm:text-sm">
-          <p className=" bg-blue-950 text-white px-12 py-1 rounded-lg  self-center">
+          <p className=" bg-blue-950 text-white px-12 py-1   self-center">
             {listing.type === "sell" ? "For Sale" : "For Rent"}
           </p>
-          <p className="bg-slate-500 text-white px-12 py-1 rounded-lg self-center">
+          <p className="bg-slate-500 text-white px-12 py-1  self-center">
             {listing.offer && listing.type === "rent"
               ? `Discounted Price $${listing.discountPrice.toLocaleString()} / month`
               : "" ||
@@ -114,13 +116,18 @@ export default function Listing() {
             <p>{listing.furnished ? "Furnished" : "Not furnished"}</p>
           </div>
         </div>
-        {!currentUser && currentUser?._id !== listing.userRef && (
-          <Link to={`/edit-listing/${listing._id}`}>
-            <button className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4">
-              contact the agent
-            </button>
-          </Link>
+        {!currentUser && !contact && currentUser?._id !== listing.userRef && (
+          // <Link to={`/edit-listing/${listing._id}`}>
+          <button
+            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4"
+            onClick={() => setContact(true)}
+          >
+            contact the agent
+          </button>
+          // </Link>
         )}
+
+        {contact && <Contact listing={listing} />}
 
         {currentUser && currentUser._id === listing.userRef && (
           <Link to={`/edit-listing/${listing._id}`}>
