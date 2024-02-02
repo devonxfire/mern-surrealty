@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FaBed, FaBath, FaParking, FaChair } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+
 import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
@@ -75,9 +77,11 @@ export default function Listing() {
 
       <div className="flex flex-col max-w-3xl mx-auto  p-6 text-sm sm:text-base gap-4">
         <h1 className="font-semibold text-lg sm:text-2xl">{listing.title}</h1>
-        <p className="text-xs text-slate-500 font-semibold">
-          {listing.address}
-        </p>
+        <div className="flex gap-1 items-center text-green-700">
+          <FaLocationDot className="text-xs" />
+          <p className="text-xs font-semibold">{listing.address}</p>
+        </div>
+
         <div className="flex gap-2 text-xs sm:text-sm">
           <p className=" bg-orange-500 text-white px-12 py-1 rounded-lg  self-center">
             {listing.type === "sell" ? "For Sale" : "For Rent"}
@@ -97,11 +101,11 @@ export default function Listing() {
                   `Price $${listing.regularPrice.toLocaleString()} / month`)}
           </p>
         </div>
-        <p className="sm:text-base text-sm">
+        <p className="sm:text-sm text-xs text-slate-500">
           <span className="font-bold">Description: </span>
           {listing.description}
         </p>
-        <div className="text-purple-500 text-xs flex gap-6">
+        <div className="text-purple-500 text-xs flex gap-6 flex-wrap">
           <div className="flex gap-1 items-center">
             <FaBed />
             <p>{listing.bedrooms} Beds</p>
@@ -117,13 +121,21 @@ export default function Listing() {
           </div>
           <div className="flex gap-1 items-center">
             <FaChair />
-            <p>{listing.furnished} Furnished</p>
+            <p>{listing.furnished ? "Furnished" : "Not furnished"}</p>
           </div>
         </div>
         <a href="mailto:#">
           <button className="uppercase p-3 bg-slate-700 hover:opacity-80 text-white rounded-lg  w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4">
             contact agent
           </button>
+
+          {currentUser && (
+            <Link to={`/edit-listing/${listing._id}`}>
+              <button className="uppercase p-3 bg-lime-500 hover:opacity-80 text-white rounded-lg  w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4">
+                edit my listing
+              </button>
+            </Link>
+          )}
         </a>
       </div>
     </main>
