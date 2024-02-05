@@ -50,7 +50,10 @@ const Header = () => {
             onChange={(e) => setsearchTerm(e.target.value)}
             value={searchTerm}
           />
-          <FaSearch className="text-slate-500 " />
+          <FaSearch
+            className="text-slate-500 cursor-pointer "
+            onClick={handleSubmit}
+          />
         </form>
         <nav>
           <ul className="flex items-center gap-4 text-slate-500 text-xs lg:text-base font-light">
