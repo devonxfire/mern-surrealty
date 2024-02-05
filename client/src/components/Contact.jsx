@@ -47,9 +47,6 @@ export default function Contact({ listing }) {
                 Send message
               </button>
             </Link>
-            <button className="uppercase font-bold p-3 w-[30%] bg-slate-500 hover:opacity-80 text-white self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4">
-              cancel
-            </button>
           </div>
         </div>
       )}
