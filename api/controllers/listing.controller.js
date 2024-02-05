@@ -72,21 +72,28 @@ export const getListing = async (req, res, next) => {
 
 export const searchListings = async (req, res, next) => {
   try {
+    const parseBoolean = (value) => {
+      if (typeof value === "string") {
+        return value.toLowerCase() === "true";
+      }
+      return Boolean(value);
+    };
+
     const limit = parseInt(req.query.limit) || 9;
     const startIndex = parseInt(req.query.startIndex) || 0;
-    let offer = req.query.offer;
+    let offer = parseBoolean(req.query.offer);
 
     if (offer === false || offer === undefined) {
       offer = { $in: [true, false] };
     }
 
-    let furnished = req.query.furnished;
+    let furnished = parseBoolean(req.query.furnished);
 
     if (furnished === false || furnished === undefined) {
       furnished = { $in: [true, false] };
     }
 
-    let parking = req.query.parking;
+    let parking = parseBoolean(req.query.parking);
 
     if (parking === false || parking === undefined) {
       parking = { $in: [true, false] };
@@ -104,6 +111,14 @@ export const searchListings = async (req, res, next) => {
 
     const order = req.query.order || "desc";
 
+    console.log("MongoDB Query:", {
+      title: { $regex: searchTerm, $options: "i" },
+      offer,
+      furnished,
+      parking,
+      type,
+    });
+
     const listings = await Listing.find({
       title: { $regex: searchTerm, $options: "i" },
       offer,
@@ -115,7 +130,7 @@ export const searchListings = async (req, res, next) => {
       .limit(limit)
       .skip(startIndex);
 
-    res.status(200).json(listings);
+    return res.status(200).json(listings);
   } catch (error) {
     next(error);
   }

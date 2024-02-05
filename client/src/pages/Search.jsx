@@ -1,20 +1,112 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Search() {
-  const [searchTerm, setsearchTerm] = useState("");
+  const [sidebardata, setSidebardata] = useState({
+    searchTerm: "",
+    type: "all",
+    offer: false,
+    parking: false,
+    furnished: false,
+    sort: "createdAt",
+    order: "desc",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [listings, setListings] = useState([]);
+
+  console.log(listings);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get("searchTerm");
-    if (searchTermFromUrl) {
-      setsearchTerm(searchTermFromUrl);
+    const typeFromUrl = urlParams.get("type");
+    const parkingFromUrl = urlParams.get("parking");
+    const furnishedFromUrl = urlParams.get("furnished");
+    const offerFromUrl = urlParams.get("offer");
+    const sortFromUrl = urlParams.get("sort");
+    const orderFromUrl = urlParams.get("order");
+
+    if (
+      searchTermFromUrl ||
+      typeFromUrl ||
+      offerFromUrl ||
+      parkingFromUrl ||
+      furnishedFromUrl ||
+      sortFromUrl ||
+      orderFromUrl
+    ) {
+      setSidebardata({
+        searchTerm: searchTermFromUrl || "",
+        type: typeFromUrl || "all",
+        offer: offerFromUrl === "true" ? true : false,
+        parking: parkingFromUrl === "true" ? true : false,
+        furnished: furnishedFromUrl === "true" ? true : false,
+        sort: sortFromUrl || "createdAt",
+        order: orderFromUrl || "desc",
+      });
     }
+
+    const fetchListings = async () => {
+      try {
+        setLoading(true);
+        const searchQuery = urlParams.toString();
+        const res = await fetch(`/api/listing/get?${searchQuery}`);
+        console.log(res);
+        const data = await res.json();
+        setListings(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchListings();
   }, [location.search]);
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    if (
+      e.target.id === "all" ||
+      e.target.id === "rent" ||
+      e.target.id === "sell"
+    ) {
+      setSidebardata({ ...sidebardata, type: e.target.id });
+    }
+
+    if (e.target.id === "searchTerm") {
+      setSidebardata({ ...sidebardata, searchTerm: e.target.value });
+    }
+
+    if (
+      e.target.id === "parking" ||
+      e.target.id === "furnished" ||
+      e.target.id === "offer"
+    ) {
+      setSidebardata({
+        ...sidebardata,
+        [e.target.id]:
+          e.target.checked || e.target.checked === "true" ? true : false,
+      });
+    }
+
+    if (e.target.id === "sort_order") {
+      const sort = e.target.value.split("_")[0] || "createdAt";
+      const order = e.target.value.split("_")[1] || "desc";
+      setSidebardata({ ...sidebardata, sort, order });
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const urlParams = new URLSearchParams(location.search);
-    urlParams.set("searchTerm", searchTerm);
+    const urlParams = new URLSearchParams();
+    urlParams.set("searchTerm", sidebardata.searchTerm);
+    urlParams.set("type", sidebardata.type);
+    urlParams.set("offer", sidebardata.offer.toString());
+    urlParams.set("parking", sidebardata.parking.toString());
+    urlParams.set("furnished", sidebardata.furnished.toString());
+    urlParams.set("sort", sidebardata.sort);
+    urlParams.set("order", sidebardata.order);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
@@ -22,49 +114,79 @@ export default function Search() {
   return (
     <div className="flex flex-col sm:flex-row max-w-4xl mx-auto p-4 mt-6 gap-8 text-xs sm:text-sm">
       <div className="border-b sm:border-r sm:border-b-0">
-        <form className="   flex flex-col gap-6 p-4 ">
+        <form className="flex flex-col gap-6 p-4 " onSubmit={handleSubmit}>
           <div className="flex items-center gap-2">
             <p className="whitespace-nowrap font-semibold">Search Term:</p>
             <input
               type="text"
               id="searchTerm"
+              onChange={handleChange}
+              value={sidebardata.searchTerm}
               placeholder="Search..."
               className="bg-slate-100 rounded-lg p-3 text-slate-500 focus:outline-none "
-              value={searchTerm}
-              onChange={(e) => setsearchTerm(e.target.value)}
             />
           </div>
 
           <div className="flex gap-4 items-center flex-wrap">
             <p className="font-semibold">Type:</p>
             <div className="flex gap-2">
-              <input type="checkbox" id="all" />
+              <input
+                type="checkbox"
+                id="all"
+                onChange={handleChange}
+                checked={sidebardata.type === "all"}
+              />
               <p>Rent & Sale</p>
             </div>
 
             <div className="flex gap-2">
-              <input type="checkbox" id="rent" />
+              <input
+                type="checkbox"
+                id="rent"
+                onChange={handleChange}
+                checked={sidebardata.type === "rent"}
+              />
               <p>Rent</p>
             </div>
 
             <div className="flex gap-2">
-              <input type="checkbox" id="sell" />
+              <input
+                type="checkbox"
+                id="sell"
+                onChange={handleChange}
+                checked={sidebardata.type === "sell"}
+              />
               <p>Sale</p>
             </div>
 
             <div className="flex gap-2">
-              <input type="checkbox" id="offer" />
+              <input
+                type="checkbox"
+                id="offer"
+                onChange={handleChange}
+                checked={sidebardata.offer}
+              />
               <p>Offer</p>
             </div>
           </div>
           <div className="flex gap-4">
             <p className="font-semibold">Amenities:</p>
             <div className="flex gap-2">
-              <input type="checkbox" id="parking" />
+              <input
+                type="checkbox"
+                id="parking"
+                onChange={handleChange}
+                checked={sidebardata.parking}
+              />
               <p>Parking</p>
             </div>
             <div className="flex gap-2">
-              <input type="checkbox" id="furnished" />
+              <input
+                type="checkbox"
+                id="furnished"
+                onChange={handleChange}
+                checked={sidebardata.furnished}
+              />
               <p>Furnished</p>
             </div>
           </div>
@@ -74,18 +196,17 @@ export default function Search() {
             <select
               id="sort_order"
               className="rounded-lg border p-3 focus:outline-none"
+              onChange={handleChange}
+              defaultValue={"createdAt_desc"}
             >
-              <option>Price high to low</option>
-              <option>Price low to high</option>
-              <option>Latest</option>
-              <option>Oldest</option>
+              <option value={"regularPrice_desc"}>Price high to low</option>
+              <option value={"regularPrice_asc"}>Price low to high</option>
+              <option value={"createdAt_desc"}>Latest</option>
+              <option value={"createdAt_asc"}>Oldest</option>
             </select>
           </div>
 
-          <button
-            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4"
-            onClick={handleSubmit}
-          >
+          <button className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4">
             Search
           </button>
         </form>
@@ -95,20 +216,16 @@ export default function Search() {
         <h1 className="text-center text-slate-500 font-extrabold text-xl sm:text-3xl my-2">
           Listing Results:
         </h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam
-          soluta possimus doloribus blanditiis repellat quisquam fugit magni
-          cupiditate, sapiente, maiores quos error rem reiciendis suscipit
-          velit. Corporis nobis maxime sapiente rerum iusto quia quas aliquam
-          blanditiis illum debitis soluta aut et eos modi dolores obcaecati
-          consequuntur molestias quam, quidem ea voluptates eveniet! Eius
-          repellendus ex similique debitis, architecto earum cum nobis provident
-          laudantium omnis facere molestiae itaque, impedit natus cumque minima
-          quam! Maiores esse deserunt recusandae culpa, neque consequatur
-          corrupti deleniti inventore unde minus nihil dolor error. Dolorum
-          voluptatum nihil perspiciatis amet, obcaecati eaque consequuntur
-          vitae, illum iste aspernatur debitis!
-        </p>
+
+        {listings.map((listing) => (
+          <div key={listing._id} className="border-b p-4">
+            <h1 className="font-bold text-lg">{listing.title}</h1>
+            <p>{listing.description}</p>
+            <p>{listing.type}</p>
+            <p>{listing.regularPrice}</p>
+            <p>{listing.createdAt}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
