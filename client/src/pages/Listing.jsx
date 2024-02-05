@@ -68,7 +68,9 @@ export default function Listing() {
       )}
 
       <div className="flex flex-col max-w-3xl mx-auto  p-6 text-sm sm:text-base gap-4">
-        <h1 className="font-semibold text-lg sm:text-2xl">{listing.title}</h1>
+        <h1 className="font-semibold text-lg text-slate-500 sm:text-2xl">
+          {listing.title}
+        </h1>
         <div className="flex gap-1 items-center text-green-700">
           <FaLocationDot className="text-xs" />
           <p className="text-xs font-semibold">{listing.address}</p>
