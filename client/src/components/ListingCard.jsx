@@ -9,7 +9,7 @@ function ListingCard({ listing }) {
         <img
           src={listing.imageUrls[0]}
           alt="cover-image"
-          className=" w-full object-cover hover:scale-105 transition-scale duration-300"
+          className=" w-full h-48 object-cover hover:scale-105 transition-scale duration-300"
         />
         <div className="p-3 flex flex-col gap-2 w-full">
           <p className="text-lg text-blue-950 font-semibold truncate">
