@@ -51,7 +51,7 @@ export default function Listing() {
       )}
 
       {listing && listing.imageUrls && (
-        <Swiper navigation={true}>
+        <Swiper navigation={true} loop={true}>
           {listing.imageUrls.map((url) => (
             <SwiperSlide key={url}>
               <div
@@ -82,7 +82,7 @@ export default function Listing() {
           </p>
           <p className="bg-slate-500 text-white px-12 py-1  self-center">
             {listing.offer && listing.type === "rent"
-              ? `Discounted Price $${listing.discountPrice.toLocaleString()} / month`
+              ? `Discount Price $${listing.discountPrice.toLocaleString()} / month`
               : "" ||
                 (listing.offer &&
                   listing.type === "sell" &&
@@ -102,12 +102,20 @@ export default function Listing() {
         <div className="text-green-700 text-xs flex gap-6 flex-wrap">
           <div className="flex gap-1 items-center">
             <FaBed />
-            <p>{listing.bedrooms} Beds</p>
+            <p>
+              {listing.bedrooms && listing.bedrooms < 2
+                ? `${listing.bedrooms} Bed`
+                : `${listing.bedrooms} Beds`}
+            </p>
           </div>
 
           <div className="flex gap-1 items-center">
             <FaBath />
-            <p>{listing.bathrooms} Baths</p>
+            <p>
+              {listing.bathrooms && listing.bathrooms < 2
+                ? `${listing.bathrooms} Bath`
+                : `${listing.bathrooms} Baths`}
+            </p>
           </div>
           <div className="flex gap-1 items-center">
             <FaParking />

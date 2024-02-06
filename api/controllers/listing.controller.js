@@ -111,14 +111,6 @@ export const searchListings = async (req, res, next) => {
 
     const order = req.query.order || "desc";
 
-    console.log("MongoDB Query:", {
-      title: { $regex: searchTerm, $options: "i" },
-      offer,
-      furnished,
-      parking,
-      type,
-    });
-
     const listings = await Listing.find({
       title: { $regex: searchTerm, $options: "i" },
       offer,
