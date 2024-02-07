@@ -72,49 +72,53 @@ export default function Signup() {
       <h1 className="text-center text-slate-500 font-extrabold text-xl sm:text-3xl">
         Sign Up
       </h1>
-      <form
-        className="flex gap-4 flex-col  max-w-xl w-[85%] mx-auto px-4 py-8 shadow-xl rounded-lg text-sm sm:text-base"
-        onSubmit={handleSubmit}
-      >
-        <input
-          type="text"
-          id="username"
-          placeholder="Username"
-          className="p-3 focus:outline-none  border rounded-lg"
-          onChange={handleChange}
-        />
-        <input
-          type="email"
-          id="email"
-          placeholder="Email"
-          className="p-3 focus:outline-none  border rounded-lg"
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          id="password"
-          placeholder="Password"
-          className="p-3 focus:outline-none border rounded-lg"
-          onChange={handleChange}
-        />
-        <button
-          className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
-          disabled={loading}
-        >
-          {loading ? "Loading..." : "Sign Up"}
-        </button>
 
+      {/* extra div */}
+      <div className="shadow-xl rounded-lg max-w-xl w-[85%] mx-auto ">
+        <form
+          className="flex gap-4 flex-col pt-8  px-4   text-sm sm:text-base"
+          onSubmit={handleSubmit}
+        >
+          <input
+            type="text"
+            id="username"
+            placeholder="Username"
+            className="p-3 focus:outline-none  border rounded-lg"
+            onChange={handleChange}
+          />
+          <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            className="p-3 focus:outline-none  border rounded-lg"
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            className="p-3 focus:outline-none border rounded-lg"
+            onChange={handleChange}
+          />
+          <button
+            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-70"
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Sign Up"}
+          </button>
+
+          <ToastContainer />
+        </form>
+        <OAuth />
         <Link
           to="/signin"
           className="text-xs sm:text-sm pt-4 text-center sm:text-left"
         >
-          <p className="text-slate-500">
+          <p className="text-slate-500 px-4 py-8">
             Have an account? <span className="text-blue-500">Sign In</span>
           </p>
         </Link>
-        <ToastContainer />
-      </form>
-      <OAuth />
+      </div>
     </div>
   );
 }
