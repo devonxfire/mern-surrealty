@@ -57,7 +57,7 @@ export default function Home() {
           place with ease
         </h1>
         <p className="text-slate-500 text-xs sm:text-sm ">
-          Surrealty Estate will help you find your dream home, with our luxury
+          Surrealty Estate will help you find your dream home with our luxury
           listings.
           <br />
           We have a wide range of properties to choose from.
@@ -90,14 +90,18 @@ export default function Home() {
 
       {/* Listing results */}
       <div className="max-w-6xl mx-auto mt-8 ">
-        <h2 className="text-slate-700 font-bold text-xl sm:text-2xl text-center sm:text-left px-3">
-          Recent Offers
-        </h2>
-        <p className="text-slate-400 text-xs sm:text-sm text-center sm:text-left px-3 py-1">
-          Show more offers
-        </p>
+        <Link to={"/search?offer=true"}>
+          <h2 className="text-slate-700 font-bold text-xl sm:text-2xl text-center sm:text-left px-3">
+            Recent Offers
+          </h2>
+          <p className="text-slate-400 text-xs sm:text-sm text-center sm:text-left px-3 py-1">
+            Show more offers
+          </p>
+        </Link>
+
         <div className="flex sm:flex-row flex-col px-6 sm:px-3 md:px-4 gap-4 ">
           {offerListings &&
+            offerListings.length > 0 &&
             offerListings.map((listing) => (
               <ListingCard listing={listing} key={listing._id} />
             ))}
@@ -105,11 +109,17 @@ export default function Home() {
       </div>
 
       <div className="max-w-6xl mx-auto mt-8 ">
-        <h2 className="text-slate-700 font-bold text-xl sm:text-2xl text-center sm:text-left px-3">
-          Recent estates for rent
-        </h2>
+        <Link to={"/search?type=rent"}>
+          <h2 className="text-slate-700 font-bold text-xl sm:text-2xl text-center sm:text-left px-3">
+            Recent estates for rent
+          </h2>
+          <p className="text-slate-400 text-xs sm:text-sm text-center sm:text-left px-3 py-1">
+            Show more places to rent
+          </p>
+        </Link>
         <div className="flex sm:flex-row flex-wrap flex-col px-6 sm:px-3 md:px-4 gap-4 ">
           {rentListings &&
+            rentListings.length > 0 &&
             rentListings.map((listing) => (
               <ListingCard listing={listing} key={listing._id} />
             ))}
@@ -117,11 +127,17 @@ export default function Home() {
       </div>
 
       <div className="max-w-6xl mx-auto mt-8 ">
-        <h2 className="text-slate-700 font-bold text-xl sm:text-2xl text-center sm:text-left px-3">
-          Recent estates for sale
-        </h2>
+        <Link to={"/search?type=sell"}>
+          <h2 className="text-slate-700 font-bold text-xl sm:text-2xl text-center sm:text-left px-3">
+            Recent estates for sale
+          </h2>
+          <p className="text-slate-400 text-xs sm:text-sm text-center sm:text-left px-3 py-1">
+            Show more places for sale
+          </p>
+        </Link>
         <div className="flex sm:flex-row flex-wrap flex-col px-6 sm:px-3 md:px-4 gap-4 ">
           {saleListings &&
+            saleListings.length > 0 &&
             saleListings.map((listing) => (
               <ListingCard listing={listing} key={listing._id} />
             ))}
