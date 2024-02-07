@@ -3,7 +3,12 @@ import { FaGoogle } from "react-icons/fa";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { app } from "../firebase";
 import { useDispatch } from "react-redux";
-import { signInSuccess, signInStart } from "../redux/user/userSlice";
+import {
+  signInSuccess,
+  signInStart,
+  signInFailure,
+  reset,
+} from "../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
 
 export default function OAuth() {
@@ -12,6 +17,8 @@ export default function OAuth() {
 
   const handleGoogleClick = async () => {
     try {
+      dispatch(reset());
+
       dispatch(signInStart());
 
       const provider = new GoogleAuthProvider();
@@ -33,12 +40,13 @@ export default function OAuth() {
       navigate("/profile");
     } catch (error) {
       console.log("Could not continue with Google", error);
+      dispatch(signInFailure(error.message));
     }
   };
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center max-w-xl mx-auto w-full px-4">
       <button
-        className="uppercase font-bold p-3 border border-blue-950 hover:opacity-80 text-slate-500 w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
+        className="uppercase font-bold p-3 bg-zinc-700 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
         onClick={handleGoogleClick}
       >
         <div className="flex items-center justify-center gap-2">

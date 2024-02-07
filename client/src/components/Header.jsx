@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
-
+import { BiSolidHomeHeart } from "react-icons/bi";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -25,17 +25,23 @@ const Header = () => {
     }
   }, [location.search]);
   return (
-    <header className="border-b  bg-white ">
+    <header className="  bg-slate-100 ">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-4">
-        <Link to="/">
-          <h1 className="text-xl sm:text-3xl lg:text-4xl flex flex-wrap">
+        <Link
+          to="/"
+          className="flex items-center text-md sm:text-lg md:text-3xl text-red-600"
+        >
+          <BiSolidHomeHeart className="text-md sm:text-2xl md:text-3xl lg:text-4xl" />
+          <h1 className="text-xl sm:text-3xl lg:text-4xl flex ">
             <span
               className="
-          text-red-600 font-bold"
+          text-slate-600 font-semibold uppercase "
             >
               Surrealty
             </span>
-            <span className="text-slate-500 ">Estates</span>
+            <span className="text-red-600 uppercase font-extrabold ">
+              Estates
+            </span>
           </h1>
         </Link>
         <form
@@ -46,7 +52,7 @@ const Header = () => {
             type="search"
             id=""
             placeholder="Search..."
-            className="bg-transparent focus:outline-none w-24 sm:w-44 lg:w-64 text-slate-500"
+            className="bg-transparent focus:outline-none w-24 sm:w-44 lg:w-64 text-slate-500 border p-3 rounded-lg"
             onChange={(e) => setsearchTerm(e.target.value)}
             value={searchTerm}
           />

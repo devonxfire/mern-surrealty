@@ -16,9 +16,9 @@ function ListingCard({ listing }) {
           <p className="text-lg text-blue-950 font-semibold truncate">
             {listing.title}
           </p>
-          <div className="flex gap-2 text-xs">
+          <div className="flex gap-1 items-center text-xs">
             <FaLocationDot className="text-green-700" />
-            <p>{listing.address}</p>
+            <p className="truncate">{listing.address}</p>
           </div>
           <p className="text-slate-500 text-xs line-clamp-2">
             {listing.description}

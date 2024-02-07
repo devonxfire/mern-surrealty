@@ -63,7 +63,6 @@ const userSlice = createSlice({
       state.loading = false;
     },
     reset: (state) => {
-      state.currentUser = null;
       state.error = null;
       state.loading = false;
     },

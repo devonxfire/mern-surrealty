@@ -8,12 +8,12 @@ import {
   reset,
 } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Signin() {
   const [formData, setFormdata] = useState({});
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(null);
-  const { loading, error, currentUser } = useSelector((state) => state.user);
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -21,10 +21,26 @@ export default function Signin() {
     setFormdata({ ...formData, [e.target.id]: e.target.value });
   };
 
+  const showToastOnError = (error) => {
+    if (error) {
+      toast.error(error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      dispatch(reset());
       dispatch(signInStart());
       const res = await fetch("/api/auth/signin", {
         method: "POST",
@@ -37,20 +53,17 @@ export default function Signin() {
       const data = await res.json();
 
       if (data.success === false) {
-        // setLoading(false);
-        // setError(data.message);
         dispatch(signInFailure(data.message));
+        showToastOnError(data.message);
 
         return;
       }
-      // setLoading(false);
-      // setError(null);
+
       dispatch(signInSuccess(data));
       navigate("/profile");
     } catch (error) {
-      // setError("Server Error: " + error.message);
-      // setLoading(false);
       dispatch(signInFailure(error.message));
+      showToastOnError(error.message);
     }
   };
 
@@ -59,52 +72,48 @@ export default function Signin() {
       <h1 className="text-center text-slate-500 font-extrabold text-xl sm:text-3xl">
         Sign In
       </h1>
-      <form
-        className="flex gap-4 flex-col  max-w-xl w-[85%] mx-auto px-4 py-8 shadow-xl rounded-lg text-sm sm:text-base"
-        onSubmit={handleSubmit}
-      >
-        <input
-          type="email"
-          id="email"
-          placeholder="Email"
-          className="p-3 focus:outline-none  border rounded-lg"
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          id="password"
-          placeholder="Password"
-          className="p-3 focus:outline-none border rounded-lg"
-          onChange={handleChange}
-        />
-        <button
-          className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
-          disabled={loading}
+
+      {/* extra div */}
+      <div className="shadow-xl rounded-lg max-w-xl w-[85%] mx-auto ">
+        <form
+          className="flex gap-4 flex-col pt-8  px-4   text-sm sm:text-base"
+          onSubmit={handleSubmit}
         >
-          {loading ? "Loading..." : "Sign In"}
-        </button>
+          <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            className="p-3 focus:outline-none  border rounded-lg"
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            className="p-3 focus:outline-none border rounded-lg"
+            onChange={handleChange}
+          />
+          <button
+            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Sign In"}
+          </button>
+
+          <ToastContainer />
+        </form>
         <OAuth />
+
         <Link
           to="/signup"
           className="text-xs sm:text-sm pt-4 text-center sm:text-left"
         >
-          <p className="text-slate-500 ">
+          <p className="text-slate-500 px-4 py-8 ">
             Don&apos;t have an account?{" "}
             <span className="text-blue-500">Sign Up</span>
           </p>
         </Link>
-        <p className="text-red-500">
-          {error ? error : ""}
-          {error && (
-            <button
-              className="border bg-purple-500 text-white px-3  ml-2 rounded-lg"
-              onClick={() => dispatch(reset())}
-            >
-              OK
-            </button>
-          )}
-        </p>
-      </form>
+      </div>
     </div>
   );
 }
