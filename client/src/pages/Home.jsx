@@ -6,6 +6,7 @@ import "swiper/swiper-bundle.css";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import ListingCard from "../components/ListingCard";
+import keys from "../assets/keys.png";
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
@@ -50,24 +51,34 @@ export default function Home() {
   return (
     <div className="">
       {/* Top */}
-      <div className="flex flex-col gap-6 sm:py-28 py-12 px-4 max-w-6xl mx-auto">
-        <h1 className="text-4xl sm:text-6xl text-slate-700 font-bold">
-          Find your next
-          <span className="text-slate-400 font-bold"> perfect</span> <br />
-          place with ease
-        </h1>
-        <p className="text-slate-500 text-xs sm:text-sm ">
-          Surrealty Estate will help you find your dream home with our luxury
-          listings.
-          <br />
-          We have a wide range of properties to choose from.
-        </p>
-        <Link
-          to="/search"
-          className="text-blue-950 sm:text-xs font-bold hover:cursor-pointer"
-        >
-          Lets get started..
-        </Link>
+      <div className="flex items-center max-w-6xl mx-auto">
+        <div className="flex flex-col gap-6 sm:py-28 py-12 mx-auto">
+          <div className="flex flex-wrap  items-center">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl text-slate-700 font-bold">
+              Find your next
+              <span className="text-slate-400 font-bold"> perfect</span> <br />
+              place with ease
+            </h1>
+
+            <img
+              src={keys}
+              alt="keys"
+              className="h-[80px] md:h-[100px] hidden sm:block pl-4 transition-transform transform rotate-0 hover:rotate-6 "
+            />
+          </div>
+          <p className="text-slate-500 text-xs sm:text-sm ">
+            Surrealty Estate will help you find your dream home with our luxury
+            listings.
+            <br />
+            We have a wide range of properties to choose from.
+          </p>
+          <Link
+            to="/search"
+            className="text-blue-950 sm:text-xs font-bold hover:cursor-pointer"
+          >
+            Lets get started..
+          </Link>
+        </div>
       </div>
 
       {/* Swiper */}
