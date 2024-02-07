@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "nodemon api/index.js",
     "start": "node api/index.js",
-    "build": "npm install && npm install --prefix client && npm run build --prefix client"
+    "build": "npm install && npm install --prefix client && npm run build --prefix client",
+    "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json"
   },
   "keywords": [],
   "author": "",
@@ -21,5 +22,9 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.1",
     "nodemon": "^3.0.3"
+  },
+  "devDependencies": {
+    "vite-plugin-bundle-analyzer": "^0.0.1",
+    "webpack-bundle-analyzer": "^4.10.1"
   }
 }

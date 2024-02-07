@@ -1,5 +1,5 @@
 import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaRegEye } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -54,7 +54,7 @@ export default function () {
           listings.map((listing) => (
             <div
               key={listing._id}
-              className="border mt-4 rounded-lg p-3 flex justify-between items-center gap-4 hover:bg-blue-950 text-slate-500  hover:text-white"
+              className="border mt-4 rounded-lg p-3 flex justify-between items-center gap-4 hover:bg-slate-100 text-slate-500  "
             >
               <Link to={`/listing/${listing._id}`}>
                 <img
@@ -67,20 +67,30 @@ export default function () {
                 className="   truncate flex-1"
                 to={`/listing/${listing._id}`}
               >
-                <p>{listing.title}</p>
+                <p className="text-sm">{listing.title}</p>
               </Link>
+
+              <div className="flex items-center gap-1 ">
+                <Link
+                  className="  flex items-center gap-2"
+                  to={`/listing/${listing._id}`}
+                >
+                  <button className="text-green-700 text-sm">View</button>
+                  <FaRegEye className="text-sm cursor-pointer text-green-700  mr-4" />{" "}
+                </Link>
+              </div>
 
               <div className="flex items-center gap-1 ">
                 <Link
                   to={`/edit-listing/${listing._id}`}
                   className="flex items-center gap-2"
                 >
-                  <button className="text-slate-500">Edit</button>
-                  <FaEdit className="text-lg cursor-pointer text-slate-500  mr-4" />
+                  <button className="text-slate-500 text-sm">Edit</button>
+                  <FaEdit className="text-sm cursor-pointer text-slate-500  mr-4" />
                 </Link>
 
                 <button
-                  className="text-red-500"
+                  className="text-red-500 text-sm"
                   onClick={() => handleDelete(listing._id)}
                 >
                   Delete
