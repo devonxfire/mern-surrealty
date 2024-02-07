@@ -238,9 +238,10 @@ export default function Search() {
         </form>
       </div>
       {/* Right block for result cards */}
-      <div className="min-h-screen">
-        <h1 className="text-center text-slate-500 font-extrabold text-xl sm:text-3xl my-2">
-          {`${listings.length} Listings matched your search`}
+      <div className="min-h-screen w-full">
+        <h1 className="text-center  text-slate-500 font-bold text-xl sm:text-3xl my-2">
+          {listings.length}{" "}
+          <span className="font-light"> listings matched your search</span>
         </h1>
         <div className="flex ">
           <div className="flex flex-wrap gap-4">

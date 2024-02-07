@@ -13,8 +13,6 @@ export default function Home() {
   const [rentListings, setRentListings] = useState([]);
   SwiperCore.use([Navigation]);
 
-  console.log(offerListings);
-
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
@@ -68,7 +66,7 @@ export default function Home() {
           to="/search"
           className="text-blue-950 sm:text-xs font-bold hover:cursor-pointer"
         >
-          Lets get started...
+          Lets get started..
         </Link>
       </div>
 
@@ -78,14 +76,13 @@ export default function Home() {
         {offerListings &&
           offerListings.length > 0 &&
           offerListings.map((listing) => (
-            <SwiperSlide>
+            <SwiperSlide key={listing._id}>
               <div
                 style={{
                   background: `url(${listing.imageUrls[0]}) center no-repeat`,
                   backgroundSize: "cover",
                 }}
                 className="h-[400px]"
-                key={listing._id}
               ></div>
             </SwiperSlide>
           ))}
@@ -96,9 +93,38 @@ export default function Home() {
         <h2 className="text-slate-700 font-bold text-xl sm:text-2xl text-center sm:text-left px-3">
           Recent Offers
         </h2>
-        <div className="flex sm:flex-row flex-col px-6 sm:px-3 md:px-4 gap-4 w-[70%]">
+        <p className="text-slate-400 text-xs sm:text-sm text-center sm:text-left px-3 py-1">
+          Show more offers
+        </p>
+        <div className="flex sm:flex-row flex-col px-6 sm:px-3 md:px-4 gap-4 ">
           {offerListings &&
-            offerListings.map((listing) => <ListingCard listing={listing} />)}
+            offerListings.map((listing) => (
+              <ListingCard listing={listing} key={listing._id} />
+            ))}
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto mt-8 ">
+        <h2 className="text-slate-700 font-bold text-xl sm:text-2xl text-center sm:text-left px-3">
+          Recent estates for rent
+        </h2>
+        <div className="flex sm:flex-row flex-wrap flex-col px-6 sm:px-3 md:px-4 gap-4 ">
+          {rentListings &&
+            rentListings.map((listing) => (
+              <ListingCard listing={listing} key={listing._id} />
+            ))}
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto mt-8 ">
+        <h2 className="text-slate-700 font-bold text-xl sm:text-2xl text-center sm:text-left px-3">
+          Recent estates for sale
+        </h2>
+        <div className="flex sm:flex-row flex-wrap flex-col px-6 sm:px-3 md:px-4 gap-4 ">
+          {saleListings &&
+            saleListings.map((listing) => (
+              <ListingCard listing={listing} key={listing._id} />
+            ))}
         </div>
       </div>
     </div>
