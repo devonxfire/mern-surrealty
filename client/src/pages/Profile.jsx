@@ -20,8 +20,8 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
-import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Profile() {
   const { currentUser, error } = useSelector((state) => state.user);
@@ -213,7 +213,7 @@ export default function Profile() {
           className="uppercase font-bold p-3 bg-slate-500 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4"
           disabled={isLoading}
         >
-          {isLoading ? "Loading..." : "Update profile"}
+          {isLoading ? "Loading..." : "save changes"}
         </button>
         {isSuccess ? (
           <p className="text-green-500 text-sm">User updated successfully!</p>

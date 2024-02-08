@@ -75,8 +75,8 @@ const Header = () => {
                 onClick={handleBurgerClick}
               />
               {burgerClick && (
-                <div className="flex flex-col absolute z-10 md:hidden bg-white shadow-lg p-2 mt-1 pb-4">
-                  <ul className="flex flex-col gap-2 mt-2 whitespace-nowrap">
+                <div className="flex flex-col absolute z-10 md:hidden bg-white shadow-lg p-2 mt-1 pb-4 rounded-sm">
+                  <ul className="flex flex-col gap-4 w-[50px] items-center mt-2 whitespace-nowrap">
                     <Link to="/" onClick={() => setBurgerClick(false)}>
                       <li className="hover:underline hover:text-red-600">
                         Home

@@ -71,16 +71,15 @@ export default function Home() {
             </div>
             <p className="text-white text-xs sm:text-sm border-b pb-6">
               Surrealty Estate will help you find your dream home with our
-              luxury listings.
-              <br />
-              We have a wide range of properties to choose from.
+              luxury listings, or sell <br />
+              your beloved home to the right buyer.
             </p>
             <Link
               to="/search"
               className="text-blue-950 sm:text-xs font-bold hover:cursor-pointer mt-2"
             >
               <button className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white sm:w-[40%] text-xs sm:text-sm w-full self-center transition duration-300 ease-in-out transform hover:scale-105">
-                find my dream home
+                browse listings
               </button>
             </Link>
           </div>
