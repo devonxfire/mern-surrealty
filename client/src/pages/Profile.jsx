@@ -193,12 +193,12 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex flex-col  pt-12 min-h-screen">
-      <h1 className="text-center text-slate-500 font-extrabold text-xl sm:text-3xl">
+    <div className="flex flex-col  pt-12 min-h-screen bg-gradient-to-r from-white to-[#c1c1c1]">
+      <h1 className="text-center text-red-700 font-extrabold text-xl sm:text-3xl">
         My Profile
       </h1>
       <form
-        className="flex gap-4 flex-col  max-w-xl w-[85%] mx-auto px-4 py-8 shadow-xl rounded-lg text-sm sm:text-base"
+        className="flex gap-4 flex-col  max-w-xl w-[85%] mx-auto px-4 py-8 shadow-xl rounded-lg text-sm sm:text-base bg-white mt-6"
         onSubmit={handleSubmit}
       >
         <img
@@ -258,32 +258,29 @@ export default function Profile() {
           onChange={handleChange}
         />
         <button
-          className="uppercase font-bold p-3 bg-slate-500 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4 text-sm"
+          className="uppercase font-bold p-3 bg-slate-500 hover:opacity-80 text-white w-[50%] self-center  transition duration-300 ease-in-out transform hover:scale-105 mt-4 text-xs"
           disabled={isLoading}
         >
           {isLoading ? "Loading..." : "save changes"}
         </button>
 
-        <Link to="/create-listing" className="w-full flex justify-center">
+        <Link to="/my-listings" className="w-full text-center">
           <button
-            className="uppercase font-bold p-3 bg-blue-950 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 text-sm"
-            disabled={isLoading}
-          >
-            Create a new Listing
-          </button>
-        </Link>
-        <Link to="/my-listings" className="w-full flex justify-center">
-          <button
-            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 text-sm"
+            className="uppercase font-bold p-3 bg-slate-700 hover:opacity-80 text-white w-[50%]  transition duration-300 ease-in-out transform hover:scale-105 text-xs"
             disabled={isLoading}
           >
             view my listings
           </button>
         </Link>
-        <Link
-          to="/signin"
-          className="text-xs sm:text-sm pt-4 text-center sm:text-left"
-        >
+        <Link to="/create-listing" className="w-full text-center  ">
+          <button
+            className="uppercase font-bold p-3 bg-red-700 hover:opacity-80 text-white w-[50%] transition duration-300 ease-in-out transform hover:scale-105 text-xs whitespace-nowrap"
+            disabled={isLoading}
+          >
+            + Create a new Listing
+          </button>
+        </Link>
+        <Link to="/signin" className="text-xs  pt-4 text-center sm:text-left">
           <p className="flex justify-between">
             <span className="text-red-500" onClick={handleDelete}>
               Delete Account

@@ -43,7 +43,7 @@ export default function Contact({ listing }) {
               to={`mailto:${agent.email}?subject=Regarding ${listing.title}&body=${message}`}
               className=" w-[30%] "
             >
-              <button className="uppercase w-full font-bold p-3 bg-red-600 hover:opacity-80 text-white self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4 text-sm">
+              <button className="uppercase w-full font-bold p-3 bg-red-700 hover:opacity-80 text-white self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4 text-sm">
                 Send message
               </button>
             </Link>

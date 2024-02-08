@@ -18,7 +18,7 @@ export default function About() {
 
         <div className="text-slate-500 max-w-4xl mx-auto pt-12 sm:pt-20 relative">
           <h1 className="text-white text-3xl sm:text-5xl font-bold text-center sm:text-right pt-6">
-            Redefining <span className="text-red-600">Luxury</span> Real Estate.
+            Redefining <span className="text-red-700">Luxury</span> Real Estate.
           </h1>
           <p className="text-white text-xs mt-8 sm:mt-16  font-light leading-6">
             Welcome to Surrealty Estates, a revolutionary platform that
@@ -27,7 +27,7 @@ export default function About() {
             maintaining inclusivity for all, offering a sophisticated experience
             for both sellers and buyers. <br />
             <br />
-            <span className="text-red-600 font-bold">
+            <span className="text-red-700 font-bold">
               User-Centric Onboarding:
             </span>{" "}
             We provide a user-centric sign-up experience, allowing users to
@@ -35,7 +35,7 @@ export default function About() {
             platform ensures a seamless onboarding journey, catering to the
             unique needs of each participant. <br />
             <br />
-            <span className="text-red-600 font-bold">Agent Paradise: </span> For
+            <span className="text-red-700 font-bold">Agent Paradise: </span> For
             agents, Surrealty Estates is a paradise for presenting their unique
             listings. The user-friendly interface allows for easy uploading of
             high-quality images, detailed property descriptions, and virtual
@@ -44,7 +44,7 @@ export default function About() {
             closing deals more efficiently.
             <br />
             <br />
-            <span className="text-red-600 font-bold">
+            <span className="text-red-700 font-bold">
               Luxury at Your Fingertips:{" "}
             </span>
             While emphasizing the luxurious housing market, we remain inclusive,
@@ -53,7 +53,7 @@ export default function About() {
             curated collection of exquisite properties.
             <br />
             <br />
-            <span className="text-red-600 font-bold">
+            <span className="text-red-700 font-bold">
               Community and Trust:
             </span>{" "}
             Beyond transactions, we foster a sense of community. Users can share

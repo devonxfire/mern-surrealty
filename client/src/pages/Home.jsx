@@ -48,7 +48,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-slate-100">
+    <div className="bg-gradient-to-r from-white to-[#c1c1c1]">
       <div
         className="relative"
         style={{
@@ -65,7 +65,7 @@ export default function Home() {
             <div className="flex flex-wrap items-center">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white">
                 Find your next
-                <span className="text-red-600 font-bold"> perfect</span> <br />
+                <span className="text-red-700 font-bold"> perfect</span> <br />
                 home with ease.
               </h1>
             </div>
@@ -74,14 +74,27 @@ export default function Home() {
               luxury listings, or sell <br />
               your beloved home to the right buyer.
             </p>
-            <Link
-              to="/search"
-              className="text-blue-950 sm:text-xs font-bold hover:cursor-pointer mt-2"
-            >
-              <button className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white sm:w-[40%] text-xs sm:text-sm w-full self-center transition duration-300 ease-in-out transform hover:scale-105">
-                browse listings
-              </button>
-            </Link>
+
+            <div className="flex flex-col sm:flex-row">
+              <Link
+                to="/signup"
+                className="sm:text-xs font-bold hover:cursor-pointer mt-2"
+              >
+                <button className="uppercase font-bold p-3 bg-transparent border hover:opacity-80 text-white  text-xs sm:text-sm w-full self-center transition duration-300 ease-in-out transform hover:scale-105">
+                  create free account
+                </button>
+              </Link>
+
+              <Link
+                to="/search"
+                className="sm:text-xs font-bold hover:cursor-pointer mt-2"
+              >
+                {" "}
+                <button className="uppercase font-bold p-3 bg-red-700 hover:opacity-80 text-white  text-xs sm:text-sm w-full self-center transition duration-300 ease-in-out transform hover:scale-105 sm:ml-4">
+                  browse listings
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

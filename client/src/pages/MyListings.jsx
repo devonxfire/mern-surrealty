@@ -96,18 +96,23 @@ export default function () {
                 </Link>
 
                 <button
-                  className="text-red-500 text-sm"
+                  className="text-red-700 text-sm"
                   onClick={() => handleDelete(listing._id)}
                 >
                   Delete
                 </button>
                 <MdDelete
-                  className="text-lg cursor-pointer  text-red-500"
+                  className="text-lg cursor-pointer  text-red-700"
                   onClick={() => handleDelete(listing._id)}
                 />
               </div>
             </div>
           ))}
+        <Link to="/create-listing" className="w-full flex ">
+          <button className="uppercase font-bold p-3 bg-red-700 hover:opacity-80 text-white w-[35%]  transition duration-300 ease-in-out transform hover:scale-105 text-xs whitespace-nowrap mt-4">
+            + Create a new Listing
+          </button>
+        </Link>
       </div>
     </div>
   );

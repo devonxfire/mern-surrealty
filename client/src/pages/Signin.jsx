@@ -71,7 +71,7 @@ export default function Signin() {
   };
 
   return (
-    <div className="flex flex-col mt-20 min-h-screen">
+    <div className="flex flex-col mt-20 min-h-screen bg-gradient-to-r from-white to-[#c1c1c1]">
       <h1 className="text-center text-slate-500 font-extrabold text-xl sm:text-3xl">
         Sign In
       </h1>
@@ -97,7 +97,7 @@ export default function Signin() {
             onChange={handleChange}
           />
           <button
-            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-70"
+            className="uppercase font-bold p-3 bg-red-700 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-70"
             disabled={loading}
           >
             {loading ? "Loading..." : "Sign In"}

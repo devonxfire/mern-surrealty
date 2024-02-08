@@ -369,7 +369,7 @@ const CreateListing = () => {
               </div>
             ))}
           <button
-            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4 text-sm"
+            className="uppercase font-bold p-3 bg-red-700 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4 text-sm"
             disabled={loading || uploading}
             onClick={handleCreateListing}
           >
