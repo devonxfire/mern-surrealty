@@ -58,6 +58,10 @@ export default function Search() {
         console.log(res);
         const data = await res.json();
 
+        if (data.length === 0) {
+          setSidebardata({ ...sidebardata, searchTerm: "" });
+        }
+
         if (data.length > 8) {
           setShowMore(true);
         }
