@@ -335,7 +335,7 @@ const CreateListing = () => {
               onChange={(e) => setFiles(e.target.files)}
             />
             <button
-              className="uppercase font-bold p-3 bg-blue-950 hover:opacity-80 text-white w-[60%] self-center transition duration-300 ease-in-out transform hover:scale-105"
+              className="uppercase font-bold p-2 bg-blue-950 hover:opacity-80 text-white w-[60%] self-center transition duration-300 ease-in-out transform hover:scale-105 text-xs"
               type="button"
               disabled={uploading}
               onClick={handleImageUpload}
@@ -369,7 +369,7 @@ const CreateListing = () => {
               </div>
             ))}
           <button
-            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4"
+            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4 text-sm"
             disabled={loading || uploading}
             onClick={handleCreateListing}
           >

@@ -21,6 +21,8 @@ export default function Signin() {
     setFormdata({ ...formData, [e.target.id]: e.target.value });
   };
 
+  console.log(formData);
+
   const showToastOnError = (error) => {
     if (error) {
       toast.error(error, {
@@ -51,6 +53,7 @@ export default function Signin() {
       });
 
       const data = await res.json();
+      console.log(data);
 
       if (data.success === false) {
         dispatch(signInFailure(data.message));
@@ -83,14 +86,14 @@ export default function Signin() {
             type="email"
             id="email"
             placeholder="Email"
-            className="p-3 focus:outline-none  border rounded-lg"
+            className="p-3 focus:outline-none  border rounded-lg text-slate-500"
             onChange={handleChange}
           />
           <input
             type="password"
             id="password"
             placeholder="Password"
-            className="p-3 focus:outline-none border rounded-lg"
+            className="p-3 focus:outline-none border rounded-lg text-slate-500"
             onChange={handleChange}
           />
           <button

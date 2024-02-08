@@ -9,14 +9,14 @@ export default function About() {
           backgroundImage: `url(${aboutHero})`,
           backgroundPosition: "center",
           backgroundSize: "cover",
-          height: "100vh",
+          minHeight: "100vh",
           position: "relative",
           padding: "0 2rem",
         }}
       >
         <div className="bg-black opacity-80 absolute inset-0"></div>
 
-        <div className="text-slate-500 max-w-4xl mx-auto pt-20 relative">
+        <div className="text-slate-500 max-w-4xl mx-auto pt-12 sm:pt-20 relative">
           <h1 className="text-white text-3xl sm:text-5xl font-bold text-center sm:text-right pt-6">
             Redefining <span className="text-red-600">Luxury</span> Real Estate.
           </h1>

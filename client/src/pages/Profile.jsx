@@ -28,16 +28,20 @@ export default function Profile() {
   const [file, setFile] = useState(null);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
+
   const [formData, setFormdata] = useState({
     username: currentUser.username,
     email: currentUser.email,
-    password: "*******",
+    password: "******",
     photo: currentUser.photo,
   });
+
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [listings, setListings] = useState([]);
   const dispatch = useDispatch();
+
+  console.log(formData);
 
   // Toasts
   const showToastOnError = (error) => {
@@ -122,7 +126,9 @@ export default function Profile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
+      console.log(formData.password);
       dispatch(updateStart());
       setIsLoading(true);
       const res = await fetch(`/api/users/update/${currentUser._id}`, {
@@ -222,7 +228,9 @@ export default function Profile() {
           ) : filePerc > 0 && filePerc < 100 ? (
             <span className="text-blue-500">{`Uploading ${filePerc}%`}</span>
           ) : filePerc === 100 ? (
-            <span className="text-green-500">Image successfully uploaded!</span>
+            <span className="text-green-500">
+              Success! Please click 'Save changes'
+            </span>
           ) : (
             ""
           )}
@@ -234,7 +242,6 @@ export default function Profile() {
           placeholder="Username"
           className="p-3 focus:outline-none  border rounded-lg text-slate-500"
           defaultValue={currentUser.username}
-          value={formData.username}
           onChange={handleChange}
         />
         <input
@@ -244,7 +251,6 @@ export default function Profile() {
           className="p-3 focus:outline-none  border rounded-lg text-slate-500"
           onChange={handleChange}
           defaultValue={currentUser.email}
-          value={formData.email}
         />
         <input
           type="password"
@@ -252,11 +258,9 @@ export default function Profile() {
           placeholder="Password"
           className="p-3 focus:outline-none border rounded-lg text-slate-500"
           onChange={handleChange}
-          defaultValue="********"
-          value={formData.password}
         />
         <button
-          className="uppercase font-bold p-3 bg-slate-500 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4"
+          className="uppercase font-bold p-3 bg-slate-500 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4 text-sm"
           disabled={isLoading}
         >
           {isLoading ? "Loading..." : "save changes"}
@@ -264,7 +268,7 @@ export default function Profile() {
 
         <Link to="/create-listing" className="w-full flex justify-center">
           <button
-            className="uppercase font-bold p-3 bg-blue-950 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
+            className="uppercase font-bold p-3 bg-blue-950 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 text-sm"
             disabled={isLoading}
           >
             Create a new Listing
@@ -272,7 +276,7 @@ export default function Profile() {
         </Link>
         <Link to="/my-listings" className="w-full flex justify-center">
           <button
-            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
+            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 text-sm"
             disabled={isLoading}
           >
             view my listings

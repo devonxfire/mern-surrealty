@@ -60,8 +60,8 @@ export default function Home() {
       >
         <div className="bg-black opacity-80 absolute inset-0"></div>
 
-        <div className="flex items-center max-w-6xl mx-auto relative">
-          <div className="flex flex-col gap-6 sm:py-28 py-12 mx-auto md:mx-0 pl-8">
+        <div className="flex items-center max-w-6xl mx-auto relative px-4">
+          <div className="flex flex-col gap-6 sm:py-28 py-12 mx-auto md:mx-0 ">
             <div className="flex flex-wrap items-center">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white">
                 Find your next

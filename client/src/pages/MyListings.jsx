@@ -50,6 +50,12 @@ export default function () {
         <h1 className="text-center text-slate-500 font-extrabold text-xl sm:text-3xl">
           My Listings
         </h1>
+        {listings.length === 0 && (
+          <p className="text-sm text-slate-500 pt-8">
+            You do not have any listings. Please click on your profile to create
+            a new listing.
+          </p>
+        )}
         {listings.length > 0 &&
           listings.map((listing) => (
             <div

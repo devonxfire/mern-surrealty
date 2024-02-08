@@ -57,7 +57,7 @@ const Header = () => {
           <input
             type="search"
             id=""
-            placeholder="Search listings..."
+            placeholder="Search"
             className="bg-transparent focus:outline-none w-24 sm:w-44 lg:w-64 text-slate-500 text-xs border p-3 rounded-lg"
             onChange={(e) => setsearchTerm(e.target.value)}
             value={searchTerm}

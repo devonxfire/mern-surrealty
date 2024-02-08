@@ -76,7 +76,7 @@ export default function Signup() {
       {/* extra div */}
       <div className="shadow-xl rounded-lg max-w-xl w-[85%] mx-auto ">
         <form
-          className="flex gap-4 flex-col pt-8  px-4   text-sm sm:text-base"
+          className="flex gap-4 flex-col pt-8  px-4   text-sm sm:text-base text-slate-500"
           onSubmit={handleSubmit}
         >
           <input
@@ -101,7 +101,7 @@ export default function Signup() {
             onChange={handleChange}
           />
           <button
-            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-70"
+            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white text-sm w-full self-center transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-70"
             disabled={loading}
           >
             {loading ? "Loading..." : "Sign Up"}
@@ -109,7 +109,7 @@ export default function Signup() {
 
           <ToastContainer />
         </form>
-        <OAuth />
+        <OAuth formData={formData} />
         <Link
           to="/signin"
           className="text-xs sm:text-sm pt-4 text-center sm:text-left"

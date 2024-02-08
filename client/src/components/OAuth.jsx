@@ -46,7 +46,7 @@ export default function OAuth() {
   return (
     <div className="flex items-center justify-center max-w-xl mx-auto w-full px-4">
       <button
-        className="uppercase font-bold p-3 bg-zinc-700 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105"
+        className="uppercase font-bold p-3 bg-zinc-700 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 text-sm"
         onClick={handleGoogleClick}
       >
         <div className="flex items-center justify-center gap-2">

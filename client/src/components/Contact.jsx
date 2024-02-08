@@ -36,14 +36,14 @@ export default function Contact({ listing }) {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Please type your message to the agent here..."
-            className="w-full border p-3  text-slate-500 rounded-lg focus:outline-none"
+            className="w-full border p-3  text-slate-500 rounded-lg focus:outline-none text-sm"
           ></textarea>
           <div className="flex gap-4">
             <Link
               to={`mailto:${agent.email}?subject=Regarding ${listing.title}&body=${message}`}
               className=" w-[30%] "
             >
-              <button className="uppercase w-full font-bold p-3 bg-red-600 hover:opacity-80 text-white self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4">
+              <button className="uppercase w-full font-bold p-3 bg-red-600 hover:opacity-80 text-white self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4 text-sm">
                 Send message
               </button>
             </Link>

@@ -8,10 +8,8 @@ export const updateUser = async (req, res, next) => {
     return next(errorHandler(401, "You can update only your account!"));
   }
 
-  if (!req.body.username || !req.body.email || !req.body.password) {
-    return next(
-      errorHandler(401, "Username, email, and password are required!")
-    );
+  if (!req.body.username || !req.body.email) {
+    return next(errorHandler(401, "Please fill in required fields!"));
   }
 
   try {

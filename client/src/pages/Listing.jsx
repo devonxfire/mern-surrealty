@@ -17,14 +17,6 @@ export default function Listing() {
   const [loading, setLoading] = useState(false);
   const [contact, setContact] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
-  // if (currentUser) {
-  //   const emailAddress = currentUser.email;
-  // }
-
-  // const subject = "I am interested in your property listing!";
-  // const mailToLink = `mailto:${emailAddress}?subject=${encodeURIComponent(
-  //   subject
-  // )}`;
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -95,7 +87,7 @@ export default function Listing() {
                   `Price $${listing.regularPrice.toLocaleString()} / month`)}
           </p>
         </div>
-        <p className="sm:text-sm text-xs text-slate-500">
+        <p className=" text-xs text-slate-500">
           <span className="font-bold">Description: </span>
           {listing.description}
         </p>
@@ -126,9 +118,20 @@ export default function Listing() {
             <p>{listing.furnished ? "Furnished" : "Not furnished"}</p>
           </div>
         </div>
-        {!currentUser && !contact && currentUser?._id !== listing.userRef && (
+
+        {/* {!currentUser ||
+          (currentUser?._id !== listing.userRef && (
+            <button
+              className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4 text-sm"
+              onClick={() => setContact(true)}
+            >
+              contact the agent
+            </button>
+          ))} */}
+
+        {(!currentUser || currentUser?._id !== listing.userRef) && (
           <button
-            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4"
+            className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4 text-sm"
             onClick={() => setContact(true)}
           >
             contact the agent
@@ -139,7 +142,7 @@ export default function Listing() {
 
         {currentUser && currentUser._id === listing.userRef && (
           <Link to={`/edit-listing/${listing._id}`}>
-            <button className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4">
+            <button className="uppercase font-bold p-3 bg-red-600 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4 text-sm">
               edit my listing
             </button>
           </Link>
