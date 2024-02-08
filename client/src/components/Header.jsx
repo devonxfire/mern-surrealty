@@ -29,7 +29,6 @@ const Header = () => {
 
   const handleBurgerClick = () => {
     setBurgerClick(!burgerClick);
-    console.log("burger clicked!");
   };
   return (
     <header className="  bg-slate-100 ">
@@ -76,20 +75,20 @@ const Header = () => {
                 onClick={handleBurgerClick}
               />
               {burgerClick && (
-                <div className="flex flex-col absolute md:hidden bg-white shadow-lg p-2 mt-1 pb-4">
+                <div className="flex flex-col absolute z-10 md:hidden bg-white shadow-lg p-2 mt-1 pb-4">
                   <ul className="flex flex-col gap-2 mt-2 whitespace-nowrap">
-                    <Link to="/">
+                    <Link to="/" onClick={() => setBurgerClick(false)}>
                       <li className="hover:underline hover:text-red-600">
                         Home
                       </li>
                     </Link>
-                    <Link to="/about">
+                    <Link to="/about" onClick={() => setBurgerClick(false)}>
                       <li className="hover:underline hover:text-red-600">
                         About
                       </li>
                     </Link>
                     {currentUser ? (
-                      <Link to="/profile">
+                      <Link to="/profile" onClick={() => setBurgerClick(false)}>
                         <img
                           src={currentUser.photo}
                           alt="user-photo"
@@ -97,7 +96,7 @@ const Header = () => {
                         />
                       </Link>
                     ) : (
-                      <Link to="/signin">
+                      <Link to="/signin" onClick={() => setBurgerClick(false)}>
                         <li className="  hover:underline hover:text-red-600">
                           Sign In
                         </li>
