@@ -68,8 +68,8 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex flex-col  pt-20  min-h-screen bg-gradient-to-r from-white to-[#e3e3e3]">
-      <h1 className="text-center text-slate-600 font-bold text-xl sm:text-3xl">
+    <div className="flex flex-col  pt-20  min-h-screen bg-gradient-to-r from-white to-slate-300">
+      <h1 className="text-center text-slate-800 font-bold text-xl sm:text-3xl">
         Sign Up
       </h1>
 

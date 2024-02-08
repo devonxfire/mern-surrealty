@@ -48,7 +48,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-white to-[#c1c1c1]">
+    <div className="bg-gradient-to-r from-white to-slate-300">
       <div
         className="relative"
         style={{

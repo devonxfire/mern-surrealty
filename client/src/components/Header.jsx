@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useSelector } from "react-redux";
@@ -10,6 +10,7 @@ const Header = () => {
   const [burgerClick, setBurgerClick] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const menuRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,8 +31,9 @@ const Header = () => {
   const handleBurgerClick = () => {
     setBurgerClick(!burgerClick);
   };
+
   return (
-    <header className="  bg-white  ">
+    <header className="  bg-gradient-to-r from-zinc-300 to-zinc-900  ">
       <div className="flex justify-between items-center max-w-6xl mx-auto py-8 px-4">
         <Link
           to="/"
@@ -41,11 +43,11 @@ const Header = () => {
           <h1 className="text-xl sm:text-3xl lg:text-4xl flex ">
             <span
               className="
-          text-slate-600 font-semibold uppercase "
+          text-slate-800 font-semibold uppercase "
             >
               Surrealty
             </span>
-            <span className="text-slate-400 uppercase font-extralight">
+            <span className="text-[#ffffffe9] uppercase font-extralight">
               Estates
             </span>
           </h1>
@@ -68,7 +70,7 @@ const Header = () => {
           />
         </form>
         <nav>
-          <ul className="flex items-center gap-4 text-slate-500 text-xs lg:text-base font-light">
+          <ul className="flex items-center gap-4 text-[#ffffffe9] text-xs lg:text-base font-light">
             <div className="relative">
               <RxHamburgerMenu
                 className="md:hidden block text-lg hover:cursor-pointer"
@@ -119,14 +121,10 @@ const Header = () => {
             </div>
 
             <Link to="/">
-              <li className="hidden md:inline hover:underline hover:text-red-700">
-                Home
-              </li>
+              <li className="hidden md:inline  hover:text-red-700">Home</li>
             </Link>
             <Link to="/about">
-              <li className="hidden md:inline hover:underline hover:text-red-700">
-                About
-              </li>
+              <li className="hidden md:inline  hover:text-red-700">About</li>
             </Link>
             {currentUser ? (
               <Link to="/profile">
@@ -138,7 +136,7 @@ const Header = () => {
               </Link>
             ) : (
               <Link to="/signin">
-                <li className="hidden md:block  hover:underline hover:text-red-700">
+                <li className="hidden md:block   hover:text-red-700">
                   Sign In
                 </li>
               </Link>
