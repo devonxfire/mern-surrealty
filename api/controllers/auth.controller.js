@@ -54,9 +54,6 @@ export const signin = async (req, res, next) => {
     }
 
     const validPassword = bcryptjs.compareSync(password, user.password);
-    // const validPassword = true;
-
-    console.log("Hashed password from database:", user.password);
 
     if (!validPassword) {
       return next(errorHandler(403, "Invalid credentials"));

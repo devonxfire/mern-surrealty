@@ -8,9 +8,9 @@ export const verifyToken = (req, res, next) => {
     return next(errorHandler(401, "Invalid token"));
   }
 
-  const validToken = jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) {
-      return next(errorHandler(401, "Invalid token"));
+      return next(errorHandler(403, "Forbidden access"));
     }
     req.user = user;
     next();

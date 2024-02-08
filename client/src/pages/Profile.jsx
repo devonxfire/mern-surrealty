@@ -29,12 +29,7 @@ export default function Profile() {
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
 
-  const [formData, setFormdata] = useState({
-    username: currentUser.username,
-    email: currentUser.email,
-    password: "******",
-    photo: currentUser.photo,
-  });
+  const [formData, setFormdata] = useState({});
 
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -73,6 +68,10 @@ export default function Profile() {
       });
     }
   };
+
+  // const handleChange = (e) => {
+  //   setFormdata({ ...formData, [e.target.id]: e.target.value });
+  // };
 
   const handleChange = (e) => {
     setFormdata({ ...formData, [e.target.id]: e.target.value });
@@ -128,7 +127,6 @@ export default function Profile() {
     e.preventDefault();
 
     try {
-      console.log(formData.password);
       dispatch(updateStart());
       setIsLoading(true);
       const res = await fetch(`/api/users/update/${currentUser._id}`, {
@@ -205,7 +203,7 @@ export default function Profile() {
       >
         <img
           src={formData.photo || currentUser.photo}
-          className="w-12 h-12 sm:w-24 sm:h-24 rounded-full self-center cursor-pointer  "
+          className="w-12 h-12 sm:w-24 sm:h-24 rounded-full self-center cursor-pointer object-cover "
           alt="photo"
           onClick={() => fileRef.current.click()}
         />
