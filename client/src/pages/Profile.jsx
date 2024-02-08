@@ -4,7 +4,6 @@ import {
   updateStart,
   updateSuccess,
   updateFailure,
-  signInStart,
   deleteStart,
   deleteSuccess,
   deleteFailure,
@@ -29,11 +28,47 @@ export default function Profile() {
   const [file, setFile] = useState(null);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
-  const [formData, setFormdata] = useState({});
+  const [formData, setFormdata] = useState({
+    username: currentUser.username,
+    email: currentUser.email,
+    password: "*******",
+    photo: currentUser.photo,
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [listings, setListings] = useState([]);
   const dispatch = useDispatch();
+
+  // Toasts
+  const showToastOnError = (error) => {
+    if (error) {
+      toast.error(error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+
+  const showToastOnSucces = (data) => {
+    if (data) {
+      toast.success(data, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
 
   const handleChange = (e) => {
     setFormdata({ ...formData, [e.target.id]: e.target.value });
@@ -56,6 +91,7 @@ export default function Profile() {
       fetchMyListings();
     } catch (error) {
       console.log(error);
+      showToastOnError(error.message);
     }
   }, []);
 
@@ -74,6 +110,7 @@ export default function Profile() {
       },
       (error) => {
         setFileUploadError(true);
+        showToastOnError(error.message);
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -97,18 +134,24 @@ export default function Profile() {
       });
 
       const data = await res.json();
+      console.log(data);
 
       if (data.success === false) {
+        console.log("Update failed:", data.message);
+
         dispatch(updateFailure(data.message));
         setIsLoading(false);
+        showToastOnError(data.message);
         return;
       }
       dispatch(updateSuccess(data));
       setIsLoading(false);
       setIsSuccess(true);
+      showToastOnSucces("Profile updated successfully!");
     } catch (error) {
       dispatch(updateFailure(error.message));
       setIsLoading(false);
+      showToastOnError(error.message);
     }
   };
 
@@ -156,7 +199,7 @@ export default function Profile() {
       >
         <img
           src={formData.photo || currentUser.photo}
-          className="w-12 h-12 sm:w-24 sm:h-24 rounded-full self-center cursor-pointer "
+          className="w-12 h-12 sm:w-24 sm:h-24 rounded-full self-center cursor-pointer  "
           alt="photo"
           onClick={() => fileRef.current.click()}
         />
@@ -189,25 +232,28 @@ export default function Profile() {
           type="text"
           id="username"
           placeholder="Username"
-          className="p-3 focus:outline-none  border rounded-lg"
+          className="p-3 focus:outline-none  border rounded-lg text-slate-500"
           defaultValue={currentUser.username}
+          value={formData.username}
           onChange={handleChange}
         />
         <input
           type="email"
           id="email"
           placeholder="Email"
-          className="p-3 focus:outline-none  border rounded-lg"
+          className="p-3 focus:outline-none  border rounded-lg text-slate-500"
           onChange={handleChange}
           defaultValue={currentUser.email}
+          value={formData.email}
         />
         <input
           type="password"
           id="password"
           placeholder="Password"
-          className="p-3 focus:outline-none border rounded-lg"
+          className="p-3 focus:outline-none border rounded-lg text-slate-500"
           onChange={handleChange}
           defaultValue="********"
+          value={formData.password}
         />
         <button
           className="uppercase font-bold p-3 bg-slate-500 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4"
@@ -215,9 +261,6 @@ export default function Profile() {
         >
           {isLoading ? "Loading..." : "save changes"}
         </button>
-        {isSuccess ? (
-          <p className="text-green-500 text-sm">User updated successfully!</p>
-        ) : null}
 
         <Link to="/create-listing" className="w-full flex justify-center">
           <button
@@ -250,17 +293,7 @@ export default function Profile() {
         </Link>
       </form>
 
-      <p className="text-red-500">
-        {error ? error : ""}
-        {error && (
-          <button
-            className="border bg-purple-500 text-white px-3  ml-2 rounded-lg"
-            onClick={() => dispatch(signInStart())}
-          >
-            OK
-          </button>
-        )}
-      </p>
+      <ToastContainer />
     </div>
   );
 }
