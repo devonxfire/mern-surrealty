@@ -98,6 +98,15 @@ const Header = () => {
                         About
                       </li>
                     </Link>
+                    <Link
+                      to="/search"
+                      onClick={() => setBurgerClick(false)}
+                      className="border-b pb-2"
+                    >
+                      <li className=" hover:text-red-700 cursor-pointer">
+                        Search
+                      </li>
+                    </Link>
                     {currentUser ? (
                       <Link
                         to="/profile"
