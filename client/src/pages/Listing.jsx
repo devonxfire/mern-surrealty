@@ -37,7 +37,7 @@ export default function Listing() {
     fetchListing();
   }, []);
   return (
-    <main>
+    <main className="bg-gradient-to-r from-white to-slate-300">
       {loading && (
         <p className="text-center text-lg text-slate-800 italic">Loading...</p>
       )}
@@ -59,7 +59,7 @@ export default function Listing() {
         </Swiper>
       )}
 
-      <div className="flex flex-col max-w-3xl mx-auto  p-6 text-sm sm:text-base gap-4">
+      <div className="flex flex-col max-w-3xl mx-auto  p-6 text-sm sm:text-base gap-4 ">
         <h1 className="font-semibold text-lg text-slate-500 sm:text-2xl">
           {listing.title}
         </h1>

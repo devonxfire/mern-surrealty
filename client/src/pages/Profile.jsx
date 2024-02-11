@@ -41,8 +41,12 @@ export default function Profile() {
   // Toasts
   const showToastOnError = (error) => {
     if (error) {
+      const screenWidth = window.innerWidth;
+
+      const toastPosition = screenWidth >= 768 ? "top-right" : "bottom-center";
+
       toast.error(error, {
-        position: "top-right",
+        position: toastPosition,
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -56,8 +60,12 @@ export default function Profile() {
 
   const showToastOnSucces = (data) => {
     if (data) {
+      const screenWidth = window.innerWidth;
+
+      const toastPosition = screenWidth >= 768 ? "top-right" : "bottom-center";
+
       toast.success(data, {
-        position: "top-right",
+        position: toastPosition,
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -68,10 +76,6 @@ export default function Profile() {
       });
     }
   };
-
-  // const handleChange = (e) => {
-  //   setFormdata({ ...formData, [e.target.id]: e.target.value });
-  // };
 
   const handleChange = (e) => {
     setFormdata({ ...formData, [e.target.id]: e.target.value });
@@ -193,8 +197,8 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex flex-col  pt-12 min-h-screen bg-gradient-to-r from-white to-[#c1c1c1]">
-      <h1 className="text-center text-red-700 font-extrabold text-xl sm:text-3xl">
+    <div className="flex flex-col  pt-12 min-h-screen bg-gradient-to-r from-white to-slate-300">
+      <h1 className="text-center bg-gradient-to-r text-slate-600 font-bold text-xl sm:text-3xl">
         My Profile
       </h1>
       <form
@@ -258,7 +262,7 @@ export default function Profile() {
           onChange={handleChange}
         />
         <button
-          className="uppercase font-bold p-3 bg-slate-500 hover:opacity-80 text-white w-[50%] self-center  transition duration-300 ease-in-out transform hover:scale-105 mt-4 text-xs"
+          className="uppercase font-bold p-3 bg-slate-500 hover:opacity-80 text-white w-[80%] self-center  transition duration-300 ease-in-out transform hover:scale-105 mt-4 text-xs"
           disabled={isLoading}
         >
           {isLoading ? "Loading..." : "save changes"}
@@ -266,7 +270,7 @@ export default function Profile() {
 
         <Link to="/my-listings" className="w-full text-center">
           <button
-            className="uppercase font-bold p-3 bg-slate-700 hover:opacity-80 text-white w-[50%]  transition duration-300 ease-in-out transform hover:scale-105 text-xs"
+            className="uppercase font-bold p-3 bg-slate-700 hover:opacity-80 text-white w-[80%]  transition duration-300 ease-in-out transform hover:scale-105 text-xs"
             disabled={isLoading}
           >
             view my listings
@@ -274,7 +278,7 @@ export default function Profile() {
         </Link>
         <Link to="/create-listing" className="w-full text-center  ">
           <button
-            className="uppercase font-bold p-3 bg-red-700 hover:opacity-80 text-white w-[50%] transition duration-300 ease-in-out transform hover:scale-105 text-xs whitespace-nowrap"
+            className="uppercase font-bold p-3 bg-red-700 hover:opacity-80 text-white w-[80%] transition duration-300 ease-in-out transform hover:scale-105 text-xs whitespace-nowrap"
             disabled={isLoading}
           >
             + Create a new Listing

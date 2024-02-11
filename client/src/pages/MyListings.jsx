@@ -45,15 +45,15 @@ export default function () {
     }
   };
   return (
-    <div className="flex flex-col  pt-16 min-h-screen ">
-      <div className="container max-w-xl rounded-lg shadow-lg p-3 mx-auto">
-        <h1 className="text-center text-slate-500 font-extrabold text-xl sm:text-3xl">
+    <div className="flex flex-col  pt-16 min-h-screen bg-gradient-to-r from-white to-slate-300">
+      <div className="container max-w-xl rounded-lg shadow-lg p-3 mx-auto pb-8">
+        <h1 className="text-center text-slate-600 font-bold text-xl sm:text-3xl pt-4">
           My Listings
         </h1>
         {listings.length === 0 && (
           <p className="text-sm text-slate-500 pt-8">
-            You do not have any listings. Please click on your profile to create
-            a new listing.
+            You do not have any listings. Please click the button below to
+            create a new listing.
           </p>
         )}
         {listings.length > 0 &&
@@ -108,11 +108,13 @@ export default function () {
               </div>
             </div>
           ))}
-        <Link to="/create-listing" className="w-full flex ">
-          <button className="uppercase font-bold p-3 bg-red-700 hover:opacity-80 text-white w-[35%]  transition duration-300 ease-in-out transform hover:scale-105 text-xs whitespace-nowrap mt-4">
-            + Create a new Listing
-          </button>
-        </Link>
+        <div className="flex justify-center mt-6">
+          <Link to="/create-listing" className="">
+            <button className="uppercase font-bold p-3 bg-red-700 hover:opacity-80 text-white w-full  transition duration-300 ease-in-out transform hover:scale-105 text-xs whitespace-nowrap mt-4">
+              + Create a new Listing
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

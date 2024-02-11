@@ -142,10 +142,13 @@ export default function Search() {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row  mx-auto p-4 mt-6 gap-8 text-xs sm:text-sm max-w-7xl ">
+    <div className="flex flex-col sm:flex-row  mx-auto px-4 py-8  gap-8 text-xs sm:text-sm max-w-7xl bg-gradient-to-r from-white to-slate-300">
       <div className="border-b sm:border-r sm:border-b-0">
-        <form className="flex flex-col gap-6 p-4 " onSubmit={handleSubmit}>
-          <div className="flex items-center gap-2">
+        <form
+          className="flex flex-col gap-6 p-4 text-slate-500"
+          onSubmit={handleSubmit}
+        >
+          <div className="flex items-center gap-2 ">
             <p className="whitespace-nowrap font-semibold">Search Term:</p>
             <input
               type="text"
@@ -157,7 +160,7 @@ export default function Search() {
             />
           </div>
 
-          <div className="flex gap-4 items-center flex-wrap">
+          <div className="flex gap-4 items-center flex-wrap ">
             <p className="font-semibold">Type:</p>
             <div className="flex gap-2">
               <input
@@ -244,13 +247,16 @@ export default function Search() {
       {/* Right block for result cards */}
       <div className="min-h-screen w-full">
         <h1 className="text-center  text-slate-500 font-bold text-xl sm:text-3xl my-2">
-          {listings.length}{" "}
-          <span className="font-light"> listings matched your search</span>
+          <span>
+            {listings.length > 1
+              ? `${listings.length} listings matched your search`
+              : listings.length === 1
+              ? `${listings.length} listing matched your search`
+              : "No listings matched your search"}
+          </span>
         </h1>
         <div className="flex ">
           <div className="flex flex-wrap gap-4">
-            {!loading && listings.length === 0 && <p>No listing found!</p>}
-
             {loading && <p>Loading...</p>}
 
             {!loading &&

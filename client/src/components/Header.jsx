@@ -33,34 +33,34 @@ const Header = () => {
   };
 
   return (
-    <header className="  bg-gradient-to-r from-zinc-300 to-zinc-900  ">
+    <header className="  bg-gradient-to-r from-white to-slate-200  ">
       <div className="flex justify-between items-center max-w-6xl mx-auto py-8 px-4">
         <Link
           to="/"
           className="flex items-center text-md sm:text-lg md:text-3xl text-red-700"
         >
           <BiSolidHomeHeart className="text-md sm:text-2xl md:text-2xl lg:text-3xl" />
-          <h1 className="text-xl sm:text-3xl lg:text-4xl flex ">
+          <h1 className="text-xl sm:text-3xl lg:text-4xl flex cursor-pointer ">
             <span
               className="
-          text-slate-800 font-semibold uppercase "
+          text-slate-600 font-semibold uppercase "
             >
               Surrealty
             </span>
-            <span className="text-[#ffffffe9] uppercase font-extralight">
+            <span className="text-slate-500 uppercase font-extralight">
               Estates
             </span>
           </h1>
         </Link>
         <form
-          className="bg-slate-100 rounded-lg p-3 flex items-center gap-2"
+          className="bg-slate-100 rounded-lg p-3  items-center gap-2  hidden sm:flex "
           onSubmit={handleSubmit}
         >
           <input
             type="search"
             id=""
             placeholder="Search"
-            className="bg-transparent focus:outline-none w-24 sm:w-44 lg:w-64 text-slate-500 text-xs  px-3  rounded-lg"
+            className="bg-transparent focus:outline-none w-20 sm:w-32 lg:w-64 text-slate-500 text-xs px-3 rounded-lg "
             onChange={(e) => setsearchTerm(e.target.value)}
             value={searchTerm}
           />
@@ -70,12 +70,13 @@ const Header = () => {
           />
         </form>
         <nav>
-          <ul className="flex items-center gap-4 text-[#ffffffe9] text-xs lg:text-base font-light">
+          <ul className="flex items-center gap-4 text-slate-500 text-xs lg:text-sm font-light">
             <div className="relative">
               <RxHamburgerMenu
-                className="md:hidden block text-lg hover:cursor-pointer"
+                className="md:hidden block text-2xl cursor-pointer"
                 onClick={handleBurgerClick}
               />
+              {/* Burger menu */}
               {burgerClick && (
                 <div className="flex flex-col absolute z-10 right-1 md:hidden bg-white shadow-lg p-2 mt-1 pb-4 rounded-sm text-base w-64 ">
                   <ul className="flex flex-col gap-6 self-center mt-2 whitespace-nowrap text-center py-8">
@@ -84,14 +85,18 @@ const Header = () => {
                       onClick={() => setBurgerClick(false)}
                       className="border-b pb-2"
                     >
-                      <li className=" hover:text-red-700 ">Home</li>
+                      <li className=" hover:text-red-700 cursor-pointer">
+                        Home
+                      </li>
                     </Link>
                     <Link
                       to="/about"
                       onClick={() => setBurgerClick(false)}
                       className="border-b pb-2"
                     >
-                      <li className=" hover:text-red-700">About</li>
+                      <li className=" hover:text-red-700 cursor-pointer">
+                        About
+                      </li>
                     </Link>
                     {currentUser ? (
                       <Link
@@ -110,7 +115,7 @@ const Header = () => {
                       </Link>
                     ) : (
                       <Link to="/signin" onClick={() => setBurgerClick(false)}>
-                        <li className="   hover:text-red-700 border-b pb-2">
+                        <li className="   hover:text-red-700 border-b pb-2 cursor-pointer">
                           Sign In
                         </li>
                       </Link>
@@ -121,7 +126,9 @@ const Header = () => {
             </div>
 
             <Link to="/">
-              <li className="hidden md:inline  hover:text-red-700">Home</li>
+              <li className="hidden md:inline  hover:text-red-700 cursor-pointer">
+                Home
+              </li>
             </Link>
             <Link to="/about">
               <li className="hidden md:inline  hover:text-red-700">About</li>

@@ -71,29 +71,29 @@ export default function Signin() {
   };
 
   return (
-    <div className="flex flex-col mt-20 min-h-screen bg-gradient-to-r from-white to-[#c1c1c1]">
-      <h1 className="text-center text-slate-500 font-extrabold text-xl sm:text-3xl">
+    <div className="flex flex-col  pt-20  min-h-screen bg-gradient-to-r from-white to-slate-300">
+      <h1 className="text-center bg-gradient-to-r text-slate-600 font-bold text-xl sm:text-3xl">
         Sign In
       </h1>
 
       {/* extra div */}
-      <div className="shadow-xl rounded-lg max-w-xl w-[85%] mx-auto ">
+      <div className="shadow-xl rounded-lg max-w-xl w-[85%] mx-auto bg-white mt-8">
         <form
-          className="flex gap-4 flex-col pt-8  px-4   text-sm sm:text-base"
+          className="flex gap-4 flex-col   px-4 rounded-t-lg mt-8  text-sm sm:text-base text-slate-500 bg-white"
           onSubmit={handleSubmit}
         >
           <input
             type="email"
             id="email"
             placeholder="Email"
-            className="p-3 focus:outline-none  border rounded-lg text-slate-500"
+            className="p-3 focus:outline-none  border rounded-lg "
             onChange={handleChange}
           />
           <input
             type="password"
             id="password"
             placeholder="Password"
-            className="p-3 focus:outline-none border rounded-lg text-slate-500"
+            className="p-3 focus:outline-none border rounded-lg "
             onChange={handleChange}
           />
           <button
@@ -107,11 +107,8 @@ export default function Signin() {
         </form>
         <OAuth />
 
-        <Link
-          to="/signup"
-          className="text-xs sm:text-sm pt-4 text-center sm:text-left"
-        >
-          <p className="text-slate-500 px-4 py-8 ">
+        <Link to="/signup" className="text-xs  pt-4 text-center sm:text-left">
+          <p className="text-slate-500 px-4 py-8 bg-white rounded-b-lg">
             Don&apos;t have an account?{" "}
             <span className="text-blue-500">Sign Up</span>
           </p>
