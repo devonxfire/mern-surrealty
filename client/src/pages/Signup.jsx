@@ -24,8 +24,12 @@ export default function Signup() {
 
   const showToastOnError = (error) => {
     if (error) {
+      const screenWidth = window.innerWidth;
+
+      const toastPosition = screenWidth >= 768 ? "top-right" : "bottom-center";
+
       toast.error(error, {
-        position: "top-right",
+        position: toastPosition,
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

@@ -23,8 +23,6 @@ export const signup = async (req, res, next) => {
     }
     const hashedPassword = bcryptjs.hashSync(password, 10);
 
-    console.log("Hashed password during signup:", hashedPassword);
-
     const newUser = await User.create({
       username,
       email,
