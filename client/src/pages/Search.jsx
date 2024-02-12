@@ -142,137 +142,139 @@ export default function Search() {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row  mx-auto px-4 py-8  gap-8 text-xs sm:text-sm max-w-7xl bg-gradient-to-r from-white to-slate-300">
-      <div className="border-b sm:border-r sm:border-b-0">
-        <form
-          className="flex flex-col gap-6 p-4 text-slate-500"
-          onSubmit={handleSubmit}
-        >
-          <div className="flex items-center gap-2 ">
-            <p className="whitespace-nowrap font-semibold">Search Term:</p>
-            <input
-              type="text"
-              id="searchTerm"
-              onChange={handleChange}
-              value={sidebardata.searchTerm}
-              placeholder="Search..."
-              className="bg-slate-100 rounded-lg p-3 text-slate-500 focus:outline-none "
-            />
-          </div>
-
-          <div className="flex gap-4 items-center flex-wrap ">
-            <p className="font-semibold">Type:</p>
-            <div className="flex gap-2">
+    <div className="min-h-screen bg-gradient-to-r from-white to-slate-300">
+      <div className="flex flex-col sm:flex-row  mx-auto px-4 py-8  gap-8 text-xs sm:text-sm max-w-7xl ">
+        <div className="border-b sm:border-r sm:border-b-0">
+          <form
+            className="flex flex-col gap-6 p-4 text-slate-500"
+            onSubmit={handleSubmit}
+          >
+            <div className="flex items-center gap-2 ">
+              <p className="whitespace-nowrap font-semibold">Search Term:</p>
               <input
-                type="checkbox"
-                id="all"
+                type="text"
+                id="searchTerm"
                 onChange={handleChange}
-                checked={sidebardata.type === "all"}
+                value={sidebardata.searchTerm}
+                placeholder="Search..."
+                className="bg-slate-100 rounded-lg p-3 text-slate-500 focus:outline-none "
               />
-              <p>Rent & Sale</p>
             </div>
 
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="rent"
-                onChange={handleChange}
-                checked={sidebardata.type === "rent"}
-              />
-              <p>Rent</p>
+            <div className="flex gap-4 items-center flex-wrap ">
+              <p className="font-semibold">Type:</p>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="all"
+                  onChange={handleChange}
+                  checked={sidebardata.type === "all"}
+                />
+                <p>Rent & Sale</p>
+              </div>
+
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="rent"
+                  onChange={handleChange}
+                  checked={sidebardata.type === "rent"}
+                />
+                <p>Rent</p>
+              </div>
+
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="sell"
+                  onChange={handleChange}
+                  checked={sidebardata.type === "sell"}
+                />
+                <p>Sale</p>
+              </div>
+
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="offer"
+                  onChange={handleChange}
+                  checked={sidebardata.offer}
+                />
+                <p>Offer</p>
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <p className="font-semibold">Amenities:</p>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="parking"
+                  onChange={handleChange}
+                  checked={sidebardata.parking}
+                />
+                <p>Parking</p>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="furnished"
+                  onChange={handleChange}
+                  checked={sidebardata.furnished}
+                />
+                <p>Furnished</p>
+              </div>
             </div>
 
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="sell"
+            <div className="flex gap-2 items-center">
+              <p className="font-semibold">Sort:</p>
+              <select
+                id="sort_order"
+                className="rounded-lg border p-3 focus:outline-none"
                 onChange={handleChange}
-                checked={sidebardata.type === "sell"}
-              />
-              <p>Sale</p>
-            </div>
-
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="offer"
-                onChange={handleChange}
-                checked={sidebardata.offer}
-              />
-              <p>Offer</p>
-            </div>
-          </div>
-          <div className="flex gap-4">
-            <p className="font-semibold">Amenities:</p>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="parking"
-                onChange={handleChange}
-                checked={sidebardata.parking}
-              />
-              <p>Parking</p>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="furnished"
-                onChange={handleChange}
-                checked={sidebardata.furnished}
-              />
-              <p>Furnished</p>
-            </div>
-          </div>
-
-          <div className="flex gap-2 items-center">
-            <p className="font-semibold">Sort:</p>
-            <select
-              id="sort_order"
-              className="rounded-lg border p-3 focus:outline-none"
-              onChange={handleChange}
-              defaultValue={"createdAt_desc"}
-            >
-              <option value={"regularPrice_desc"}>Price high to low</option>
-              <option value={"regularPrice_asc"}>Price low to high</option>
-              <option value={"createdAt_desc"}>Latest</option>
-              <option value={"createdAt_asc"}>Oldest</option>
-            </select>
-          </div>
-
-          <button className="uppercase font-bold p-3 bg-red-700 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4">
-            Search
-          </button>
-        </form>
-      </div>
-      {/* Right block for result cards */}
-      <div className="min-h-screen w-full">
-        <h1 className="text-center  text-slate-500 font-bold text-xl sm:text-3xl my-2">
-          <span>
-            {listings.length > 1
-              ? `${listings.length} listings matched your search`
-              : listings.length === 1
-              ? `${listings.length} listing matched your search`
-              : "No listings matched your search"}
-          </span>
-        </h1>
-        <div className="flex ">
-          <div className="flex flex-wrap gap-4">
-            {loading && <p>Loading...</p>}
-
-            {!loading &&
-              listings &&
-              listings.map((listing) => (
-                <ListingCard key={listing._id} listing={listing} />
-              ))}
-            {console.log(showMore)}
-            {showMore && (
-              <button
-                className="text-green-700 p-7 hover:underline"
-                onClick={showMoreClick}
+                defaultValue={"createdAt_desc"}
               >
-                Show more...
-              </button>
-            )}
+                <option value={"regularPrice_desc"}>Price high to low</option>
+                <option value={"regularPrice_asc"}>Price low to high</option>
+                <option value={"createdAt_desc"}>Latest</option>
+                <option value={"createdAt_asc"}>Oldest</option>
+              </select>
+            </div>
+
+            <button className="uppercase font-bold p-3 bg-red-700 hover:opacity-80 text-white w-full self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4">
+              Search
+            </button>
+          </form>
+        </div>
+        {/* Right block for result cards */}
+        <div className="min-h-screen w-full">
+          <h1 className="text-center  text-slate-500 font-bold text-xl sm:text-3xl my-2">
+            <span>
+              {listings.length > 1
+                ? `${listings.length} listings matched your search`
+                : listings.length === 1
+                ? `${listings.length} listing matched your search`
+                : "No listings matched your search"}
+            </span>
+          </h1>
+          <div className="flex ">
+            <div className="flex flex-wrap gap-4">
+              {loading && <p>Loading...</p>}
+
+              {!loading &&
+                listings &&
+                listings.map((listing) => (
+                  <ListingCard key={listing._id} listing={listing} />
+                ))}
+              {console.log(showMore)}
+              {showMore && (
+                <button
+                  className="text-green-700 p-7 hover:underline"
+                  onClick={showMoreClick}
+                >
+                  Show more...
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>

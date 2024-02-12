@@ -73,7 +73,6 @@ export const google = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
 
-    // if user exists, sign in
     if (user) {
       const { password: pass, ...rest } = user._doc;
 
