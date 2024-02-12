@@ -70,7 +70,7 @@ export default function Home() {
               </h1>
             </div>
             <p className="text-white text-xs sm:text-sm border-b pb-6">
-              Surrealty Estate will help you find your dream home with our
+              Surrealty Estates will help you find your dream home with our
               luxury listings, or sell <br />
               your beloved home to the right buyer.
             </p>
