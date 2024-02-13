@@ -20,7 +20,7 @@ export default function About() {
           <h1 className="text-white text-3xl sm:text-5xl font-bold text-center sm:text-right pt-6">
             Redefining <span className="text-red-700">Luxury</span> Real Estate.
           </h1>
-          <p className="text-white text-xs mt-8 sm:mt-16  font-light leading-6">
+          <p className="text-white text-xs sm:text-sm mt-8 sm:mt-16  font-light leading-6">
             Welcome to Surrealty Estates, a revolutionary platform that
             seamlessly connects dream homes with aspiring homeowners. This
             digital oasis focuses on the luxurious housing market while
