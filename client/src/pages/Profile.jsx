@@ -285,7 +285,7 @@ export default function Profile() {
             + Create a new Listing
           </button>
         </Link>
-        <Link to="/signin" className="text-xs  pt-4 text-center sm:text-left">
+        <Link to="/signin" className="text-sm  pt-4 text-center sm:text-left">
           <p className="flex justify-between">
             <span className="text-red-500" onClick={handleDelete}>
               Delete Account
