@@ -36,6 +36,7 @@ export default function Profile() {
   const [listings, setListings] = useState([]);
   const dispatch = useDispatch();
 
+  console.log(currentUser.username, currentUser.email, currentUser.photo);
   console.log(formData);
 
   // Toasts

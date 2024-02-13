@@ -114,7 +114,7 @@ export default function Signup() {
           <ToastContainer />
         </form>
         <OAuth formData={formData} />
-        <Link to="/signin" className="text-xs  pt-4 text-center sm:text-left">
+        <Link to="/signin" className="text-sms  pt-4 text-center sm:text-left">
           <p className="text-slate-500 px-4 py-8 bg-white rounded-b-lg">
             Have an account? <span className="text-blue-500">Sign In</span>
           </p>

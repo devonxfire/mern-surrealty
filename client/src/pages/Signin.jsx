@@ -111,7 +111,7 @@ export default function Signin() {
         </form>
         <OAuth />
 
-        <Link to="/signup" className="text-xs  pt-4 text-center sm:text-left">
+        <Link to="/signup" className="text-sm  pt-4 text-center sm:text-left">
           <p className="text-slate-500 px-4 py-8 bg-white rounded-b-lg">
             Don&apos;t have an account?{" "}
             <span className="text-blue-500">Sign Up</span>

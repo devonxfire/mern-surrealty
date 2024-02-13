@@ -70,7 +70,7 @@ const Header = () => {
           />
         </form>
         <nav>
-          <ul className="flex items-center gap-4 text-slate-500 text-xs lg:text-sm font-light">
+          <ul className="flex items-center gap-4 text-slate-500 text-xs lg:text-base font-light">
             <div className="relative">
               <RxHamburgerMenu
                 className="md:hidden block text-2xl cursor-pointer"
