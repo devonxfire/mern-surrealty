@@ -8,18 +8,22 @@ export default function () {
   // View my listings functionality
 
   const [listings, setListings] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { currentUser } = useSelector((state) => state.user);
   useEffect(() => {
     try {
       const fetchMyListings = async () => {
+        setLoading(true);
         const res = await fetch(`api/users/listings/${currentUser._id}`);
         console.log(res);
         const data = await res.json();
         console.log(data);
+        setLoading(false);
         setListings(data);
       };
       fetchMyListings();
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   }, []);
@@ -51,13 +55,17 @@ export default function () {
           <h1 className="text-center text-slate-600 font-bold text-xl sm:text-3xl pt-4">
             My Listings
           </h1>
-          {listings.length === 0 && (
+
+          {loading ? (
+            <p className="text-sm text-slate-500 pt-8 w-full text-center">
+              Loading...
+            </p>
+          ) : listings.length === 0 ? (
             <p className="text-sm text-slate-500 pt-8">
               You do not have any listings. Please click the button below to
               create a new listing.
             </p>
-          )}
-          {listings.length > 0 &&
+          ) : (
             listings.map((listing) => (
               <div
                 key={listing._id}
@@ -108,7 +116,9 @@ export default function () {
                   />
                 </div>
               </div>
-            ))}
+            ))
+          )}
+
           <div className="flex justify-center mt-6">
             <Link to="/create-listing" className="">
               <button className="uppercase font-bold p-3 bg-red-700 hover:opacity-80 text-white w-full  transition duration-300 ease-in-out transform hover:scale-105 text-xs whitespace-nowrap mt-4">
