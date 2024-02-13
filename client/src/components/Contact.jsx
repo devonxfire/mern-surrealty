@@ -39,9 +39,18 @@ export default function Contact({ listing }) {
             className="w-full border p-3  text-slate-500 rounded-lg focus:outline-none text-sm"
           ></textarea>
           <div className="flex gap-4">
-            <Link
+            {/* <Link
               to={`mailto:${agent.email}?subject=Regarding ${listing.title}&body=${message}`}
               className=" w-[30%] "
+            > */}
+            <Link
+              to={`https://mail.google.com/mail/?view=cm&fs=1&to=${
+                agent.email
+              }&su=Regarding%20${encodeURIComponent(
+                listing.title
+              )}&body=${encodeURIComponent(message)}`}
+              className="w-[30%]"
+              target="_blank"
             >
               <button className="uppercase w-full font-bold p-3 bg-red-700 hover:opacity-80 text-white self-center transition duration-300 ease-in-out transform hover:scale-105 mt-4 text-sm">
                 Send message
